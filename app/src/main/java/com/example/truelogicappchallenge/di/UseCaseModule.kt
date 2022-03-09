@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.global.di
+package com.example.truelogicappchallenge.di
 
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase

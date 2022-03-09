@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.global.di
+package com.example.truelogicappchallenge.di
 
 import com.example.truelogicappchallenge.data.database.CharactersDao
 import com.example.truelogicappchallenge.data.database.dto.CharacterCache
@@ -13,6 +13,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import kotlinx.coroutines.CoroutineDispatcher
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -23,8 +24,9 @@ class RepositoryModule {
         serviceApi: ServiceApi,
         db: CharactersDao,
         networkMapper: NetworkMapper<CharacterNetwork, CharacterDomain>,
-        cacheMapper: CacheMapper<CharacterCache, CharacterDomain>
+        cacheMapper: CacheMapper<CharacterCache, CharacterDomain>,
+        @DispatchersModule.IODispatcher dispatcher: CoroutineDispatcher
     ): CharactersRepository {
-        return CharactersRepositoryImpl(serviceApi, db, networkMapper, cacheMapper)
+        return CharactersRepositoryImpl(serviceApi, db, networkMapper, cacheMapper, dispatcher)
     }
 }

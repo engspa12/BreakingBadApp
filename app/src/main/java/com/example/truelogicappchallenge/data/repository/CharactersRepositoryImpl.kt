@@ -4,12 +4,13 @@ import com.example.truelogicappchallenge.data.database.CharactersDao
 import com.example.truelogicappchallenge.data.database.dto.CharacterCache
 import com.example.truelogicappchallenge.data.network.ServiceApi
 import com.example.truelogicappchallenge.data.network.responses.CharacterNetwork
+import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.CacheMapper
 import com.example.truelogicappchallenge.domain.NetworkMapper
 import com.example.truelogicappchallenge.domain.ResponseData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject
@@ -18,12 +19,13 @@ class CharactersRepositoryImpl @Inject constructor(
     private val api: ServiceApi,
     private val db: CharactersDao,
     private val networkMapper: NetworkMapper<CharacterNetwork, CharacterDomain>,
-    private val cacheMapper: CacheMapper<CharacterCache, CharacterDomain>
+    private val cacheMapper: CacheMapper<CharacterCache, CharacterDomain>,
+    @DispatchersModule.IODispatcher private val coroutineDispatcher: CoroutineDispatcher
     ): CharactersRepository {
 
     override suspend fun getListCharacters(): ResponseData<List<CharacterDomain>> {
 
-        return withContext(Dispatchers.IO) {
+        return withContext(coroutineDispatcher) {
             try {
                 val dataFromCache = db.getFavorites()
                 //If cache is empty, then use network data
@@ -59,13 +61,13 @@ class CharactersRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getListFavorites(): List<CharacterCache> {
-        return withContext(Dispatchers.IO) {
+        return withContext(coroutineDispatcher) {
             db.getFavorites()
         }
     }
 
     override suspend fun handleFavorite(nameFavoriteItem: String, isFavorite: Boolean) {
-        withContext(Dispatchers.IO){
+        withContext(coroutineDispatcher){
             if(isFavorite){
                 db.updateFavorite(nameFavoriteItem, false)
             } else {

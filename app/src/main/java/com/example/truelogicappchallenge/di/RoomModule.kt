@@ -1,7 +1,6 @@
-package com.example.truelogicappchallenge.global.di
+package com.example.truelogicappchallenge.di
 
 import android.content.Context
-import androidx.room.Dao
 import androidx.room.Room
 import com.example.truelogicappchallenge.data.database.CharactersDao
 import com.example.truelogicappchallenge.data.database.CharactersRoomDatabase

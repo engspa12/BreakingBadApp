@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.DataState
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ListCharactersViewModel @Inject constructor(
     private val getListCharactersUseCase: GetListCharactersUseCase,
-    private val handleFavoriteUseCase: HandleFavoritesUseCase
+    private val handleFavoriteUseCase: HandleFavoritesUseCase,
+    @DispatchersModule.MainDispatcher private val mainDispatcher: CoroutineDispatcher
 ): ViewModel() {
 
     private val _listCharacters = MutableLiveData<List<CharacterView>>()
@@ -42,7 +45,7 @@ class ListCharactersViewModel @Inject constructor(
         showProgressBar(true)
         showEmptyView(false)
 
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(mainDispatcher) {
             when(val data = getListCharactersUseCase.getRepositoryData()){
                 is DataState.Success -> {
                     sendDataToView(data.value)
@@ -54,7 +57,7 @@ class ListCharactersViewModel @Inject constructor(
     }
 
     fun saveItemAsFavorite(position: Int){
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(mainDispatcher) {
             val itemSelected = helperList[position]
             handleFavoriteUseCase.handleFavorite(itemSelected.name, itemSelected.isFavorite)
             getListCharacters()
