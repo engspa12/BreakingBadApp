@@ -21,7 +21,6 @@ class ListCharactersRepositoryImpl @Inject constructor(
             } catch (e: IOException){
                 val errorMessage = e.message.toString()
                 ResponseData.Failure(errorMessage)
-
             }
         }
 

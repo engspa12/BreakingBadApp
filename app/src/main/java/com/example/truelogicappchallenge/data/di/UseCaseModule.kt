@@ -17,7 +17,7 @@ import dagger.hilt.components.SingletonComponent
 class UseCaseModule {
 
     @Provides
-    fun providesUseCase(
+    fun provideUseCase(
         listCharactersRepository: ListCharactersRepository
     ): GetListCharactersUseCase {
         return GetListCharactersUseCaseImpl(listCharactersRepository)
