@@ -25,12 +25,12 @@ class GetListCharactersUseCaseImpl @Inject constructor(
     }
 }
 
-fun CharacterNetwork.toView(): CharacterView {
+fun CharacterDomain.toView(): CharacterView {
 
-    val name = this.name ?: "No name"
-    val nickname = this.nickname ?: "No nickname"
-    val img = this.img ?: ""
-    val favorite = false
+    val name = this.name
+    val nickname = this.nickname
+    val img = this.img
+    val favorite = this.favorite
 
     return CharacterView(
         name, nickname, img, favorite

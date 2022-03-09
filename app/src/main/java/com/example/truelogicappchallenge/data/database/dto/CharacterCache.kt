@@ -3,10 +3,10 @@ package com.example.truelogicappchallenge.data.database.dto
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "characters_favorites")
+@Entity(tableName = "favorites")
 data class CharacterCache(
-    @PrimaryKey
-    var id: Int,
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null,
     val characterName: String,
     val isFavorite: Boolean
 )

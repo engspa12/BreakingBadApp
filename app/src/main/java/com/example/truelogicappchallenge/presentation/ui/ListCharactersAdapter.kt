@@ -11,8 +11,8 @@ import com.example.truelogicappchallenge.R
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 
 class ListCharactersAdapter(
-    val listCharacters: List<CharacterView>,
-    val listener: ItemClickedInterface
+    private val listCharacters: List<CharacterView>,
+    private val listener: ItemClickedInterface
 ): RecyclerView.Adapter<ListCharactersAdapter.ListCharacterHolder>() {
 
     interface ItemClickedInterface {
