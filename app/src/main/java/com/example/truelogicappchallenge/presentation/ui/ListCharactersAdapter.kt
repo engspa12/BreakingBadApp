@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.truelogicappchallenge.R
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 
@@ -41,9 +42,10 @@ class ListCharactersAdapter(
 
            Glide.with(itemView.context)
                .load(list[position].img)
+               .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                .into(imageURL)
 
-           if(list[position].favorite) {
+           if(list[position].isFavorite) {
                Glide.with(itemView.context)
                    .load(R.drawable.ic_favorite)
                    .into(favoriteImage)

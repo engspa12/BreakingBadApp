@@ -7,7 +7,7 @@ class CharacterNetworkMapper: NetworkMapper<CharacterNetwork,CharacterDomain> {
 
     override fun mapToDomainModel(dto: CharacterNetwork): CharacterDomain {
         return CharacterDomain(
-            dto.name ?: "No name" , dto.nickname ?: "No nickname", dto.img ?: "", false
+                dto.charId ?: 0, dto.name ?: "No name" , dto.nickname ?: "No nickname", dto.img ?: "", false
         )
     }
 

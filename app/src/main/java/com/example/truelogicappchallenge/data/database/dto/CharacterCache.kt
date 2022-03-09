@@ -5,8 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorites")
 data class CharacterCache(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
+    @PrimaryKey
+    var id: Int = 0,
     val characterName: String,
+    val characterNickname: String,
+    val urlImg: String,
     val isFavorite: Boolean
 )

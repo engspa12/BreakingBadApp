@@ -5,7 +5,6 @@ import com.example.truelogicappchallenge.domain.DataState
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 
 interface HandleFavoritesUseCase {
-    suspend fun getFavoriteItems(): DataState<List<CharacterCache>>
-    suspend fun setFavoriteItem(name: String)
-    suspend fun deleteFavoriteItem(name: String)
+    suspend fun getFavoriteItems(): List<CharacterCache>
+    suspend fun handleFavorite(name: String, isFavorite: Boolean)
 }

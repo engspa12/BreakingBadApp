@@ -1,26 +1,18 @@
 package com.example.truelogicappchallenge.domain.usecase
 
 import com.example.truelogicappchallenge.data.database.dto.CharacterCache
-import com.example.truelogicappchallenge.domain.DataState
-import com.example.truelogicappchallenge.domain.repository.FavoritesRepository
+import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import javax.inject.Inject
 
 class HandleFavoritesUseCaseImpl @Inject constructor(
-    private val favoritesRepository: FavoritesRepository
+    private val charactersRepository: CharactersRepository
 ): HandleFavoritesUseCase {
 
-    override suspend fun getFavoriteItems(): DataState<List<CharacterCache>> {
-        val favorites = favoritesRepository.getListFavorites()
-        return DataState.Success(favorites)
+    override suspend fun getFavoriteItems(): List<CharacterCache> {
+        return charactersRepository.getListFavorites()
     }
 
-    override suspend fun setFavoriteItem(name: String) {
-        favoritesRepository.saveFavorite(name)
+    override suspend fun handleFavorite(name: String, isFavorite: Boolean) {
+        charactersRepository.handleFavorite(name, isFavorite)
     }
-
-    override suspend fun deleteFavoriteItem(name: String) {
-        favoritesRepository.deleteFavorite(name)
-    }
-
-
 }

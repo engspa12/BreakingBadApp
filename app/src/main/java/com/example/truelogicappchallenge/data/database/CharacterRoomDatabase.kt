@@ -6,7 +6,7 @@ import com.example.truelogicappchallenge.data.database.dto.CharacterCache
 @Database(
     entities = [
         CharacterCache::class
-    ], version = 1)
+    ], version = 1, exportSchema = false)
 abstract class CharactersRoomDatabase: RoomDatabase() {
 
     abstract fun charactersDao(): CharactersDao
@@ -20,9 +20,9 @@ interface CharactersDao{
     fun getFavorites(): List<CharacterCache>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavorite(vararg characterCache: CharacterCache)
+    fun insertCharacter(vararg characterCache: CharacterCache)
 
-    @Query("DELETE FROM favorites WHERE characterName = :item AND isFavorite = 1")
-    fun deleteFavorite(item: String)
+    @Query("UPDATE favorites SET isFavorite = :isFavorite WHERE characterName = :itemName")
+    fun updateFavorite(itemName: String, isFavorite: Boolean)
 
 }

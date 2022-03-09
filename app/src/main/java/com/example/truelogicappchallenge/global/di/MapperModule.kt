@@ -1,7 +1,10 @@
 package com.example.truelogicappchallenge.global.di
 
+import com.example.truelogicappchallenge.data.database.dto.CharacterCache
+import com.example.truelogicappchallenge.data.database.dto.CharacterCacheMapper
 import com.example.truelogicappchallenge.data.network.responses.CharacterNetwork
 import com.example.truelogicappchallenge.data.network.responses.CharacterNetworkMapper
+import com.example.truelogicappchallenge.domain.CacheMapper
 import com.example.truelogicappchallenge.domain.NetworkMapper
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import dagger.Module
@@ -16,5 +19,10 @@ class MapperModule {
     @Provides
     fun provideNetworkMapper(): NetworkMapper<CharacterNetwork, CharacterDomain> {
         return CharacterNetworkMapper()
+    }
+
+    @Provides
+    fun provideCacheMapper(): CacheMapper<CharacterCache, CharacterDomain> {
+        return CharacterCacheMapper()
     }
 }

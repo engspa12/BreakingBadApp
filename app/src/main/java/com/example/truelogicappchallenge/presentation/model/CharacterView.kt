@@ -6,5 +6,5 @@ data class CharacterView(
     var name : String,
     var nickname : String,
     var img : String,
-    var favorite: Boolean
+    var isFavorite: Boolean
 )

@@ -1,38 +1,39 @@
 package com.example.truelogicappchallenge.domain.usecase
 
-import com.example.truelogicappchallenge.data.network.responses.CharacterNetwork
 import com.example.truelogicappchallenge.domain.DataState
 import com.example.truelogicappchallenge.domain.ResponseData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
-import com.example.truelogicappchallenge.domain.repository.ListCharactersRepository
+import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 import javax.inject.Inject
 
+
 class GetListCharactersUseCaseImpl @Inject constructor(
-    private val listCharactersRepository: ListCharactersRepository
+    private val charactersRepository: CharactersRepository
 ) : GetListCharactersUseCase {
 
     override suspend fun getRepositoryData(): DataState<List<CharacterView>> {
 
-        return when(val data = listCharactersRepository.getListCharacters()){
-            is ResponseData.Success -> {
-                DataState.Success(data.value.map { it.toView() })
-            }
-            is ResponseData.Failure -> {
-                DataState.Failure("Error")
-            }
+        return when(val data = charactersRepository.getListCharacters()){
+                is ResponseData.Success -> {
+                    val filteredList = data.value.sortedWith(compareBy({ !it.isFavorite }, { it.id}))
+                    val originalList = filteredList.map { it.toView() }
+                    DataState.Success(originalList)
+                }
+                is ResponseData.Failure -> {
+                    DataState.Failure("Error")
+                }
         }
     }
 }
 
 fun CharacterDomain.toView(): CharacterView {
-
     val name = this.name
     val nickname = this.nickname
     val img = this.img
-    val favorite = this.favorite
+    val isFavorite = this.isFavorite
 
     return CharacterView(
-        name, nickname, img, favorite
+        name, nickname, img, isFavorite
     )
 }

@@ -1,7 +1,6 @@
 package com.example.truelogicappchallenge.global.di
 
-import com.example.truelogicappchallenge.domain.repository.ListCharactersRepository
-import com.example.truelogicappchallenge.domain.repository.FavoritesRepository
+import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCaseImpl
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
@@ -17,16 +16,16 @@ class UseCaseModule {
 
     @Provides
     fun provideGetListCharactersUseCase(
-        listCharactersRepository: ListCharactersRepository
+        charactersRepository: CharactersRepository
     ): GetListCharactersUseCase {
-        return GetListCharactersUseCaseImpl(listCharactersRepository)
+        return GetListCharactersUseCaseImpl(charactersRepository)
     }
 
     @Provides
     fun provideSaveAsFavoriteUseCase(
-        savedItemsRepository: FavoritesRepository
+        charactersRepository: CharactersRepository
     ): HandleFavoritesUseCase {
-        return HandleFavoritesUseCaseImpl(savedItemsRepository)
+        return HandleFavoritesUseCaseImpl(charactersRepository)
 
     }
 }

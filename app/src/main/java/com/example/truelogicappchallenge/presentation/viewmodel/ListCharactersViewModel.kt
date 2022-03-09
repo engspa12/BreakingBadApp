@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ListCharactersViewModel @Inject constructor(
     private val getListCharactersUseCase: GetListCharactersUseCase,
-    private val saveItemAsFavoriteUseCase: HandleFavoritesUseCase
+    private val handleFavoriteUseCase: HandleFavoritesUseCase
 ): ViewModel() {
 
     private val _listCharacters = MutableLiveData<List<CharacterView>>()
@@ -39,6 +39,9 @@ class ListCharactersViewModel @Inject constructor(
 
     fun getListCharacters(){
 
+        showProgressBar(true)
+        showEmptyView(false)
+
         viewModelScope.launch(Dispatchers.Main) {
             when(val data = getListCharactersUseCase.getRepositoryData()){
                 is DataState.Success -> {
@@ -51,7 +54,12 @@ class ListCharactersViewModel @Inject constructor(
     }
 
     fun saveItemAsFavorite(position: Int){
-        val itemSelected = helperList[position]
+        viewModelScope.launch(Dispatchers.Main) {
+            val itemSelected = helperList[position]
+            handleFavoriteUseCase.handleFavorite(itemSelected.name, itemSelected.isFavorite)
+            getListCharacters()
+        }
+
     }
 
     private fun sendDataToView(data: List<CharacterView>){
