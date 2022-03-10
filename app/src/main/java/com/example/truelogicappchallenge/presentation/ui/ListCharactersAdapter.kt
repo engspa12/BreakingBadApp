@@ -16,8 +16,14 @@ class ListCharactersAdapter(
     private val listener: ItemClickedInterface
 ): RecyclerView.Adapter<ListCharactersAdapter.ListCharacterHolder>() {
 
+    private var innerList = listOf<CharacterView>()
+
     interface ItemClickedInterface {
         fun onClickedItem(position: Int)
+    }
+
+    init {
+        innerList = listCharacters
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListCharacterHolder {
@@ -25,40 +31,47 @@ class ListCharactersAdapter(
     }
 
     override fun onBindViewHolder(holder: ListCharacterHolder, position: Int) {
-        holder.setValues(listCharacters, position, listener)
+        holder.setValues(innerList, position, listener)
     }
 
     override fun getItemCount(): Int {
-        return listCharacters.size
+        return innerList.size
+    }
+
+    fun setList(newList: List<CharacterView>){
+        innerList = newList
+        notifyDataSetChanged()
     }
 
     class ListCharacterHolder(view: View): RecyclerView.ViewHolder(view) {
 
        fun setValues(list: List<CharacterView>, position: Int, listener: ItemClickedInterface){
-           val imageURL: ImageView = itemView.findViewById(R.id.imageView)
-           val favoriteImage: ImageView = itemView.findViewById(R.id.favorite_img)
-           val name: TextView = itemView.findViewById(R.id.textView)
-           val nickname: TextView = itemView.findViewById(R.id.textView2)
+           val imageURL: ImageView = itemView.findViewById(R.id.photoImageView)
+           val favoriteImageView: ImageView = itemView.findViewById(R.id.favoriteIcon)
+           val name: TextView = itemView.findViewById(R.id.nameTextView)
+           val nickname: TextView = itemView.findViewById(R.id.nicknameTextView)
 
            Glide.with(itemView.context)
                .load(list[position].img)
                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                .into(imageURL)
 
-           if(list[position].isFavorite) {
-               Glide.with(itemView.context)
-                   .load(R.drawable.ic_favorite)
-                   .into(favoriteImage)
+           val favoriteIcon = if(list[position].isFavorite) {
+               favoriteImageView.tag = R.drawable.ic_favorite
+               R.drawable.ic_favorite
            } else {
-               Glide.with(itemView.context)
-                   .load(R.drawable.ic_no_favorite)
-                   .into(favoriteImage)
+               favoriteImageView.tag = R.drawable.ic_no_favorite
+               R.drawable.ic_no_favorite
            }
+
+           Glide.with(itemView.context)
+               .load(favoriteIcon)
+               .into(favoriteImageView)
 
            name.text = list[position].name
            nickname.text = list[position].nickname
 
-           favoriteImage.setOnClickListener {
+           favoriteImageView.setOnClickListener {
                listener.onClickedItem(position)
            }
        }

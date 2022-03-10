@@ -1,9 +1,11 @@
 package com.example.truelogicappchallenge.presentation.viewmodel
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.test.espresso.idling.CountingIdlingResource
 import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.DataState
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
@@ -38,20 +40,28 @@ class ListCharactersViewModel @Inject constructor(
     val emptyView: LiveData<Boolean?>
         get() = _emptyView
 
+    private val _container = MutableLiveData<Boolean?>()
+    val container: LiveData<Boolean?>
+        get() = _container
+
     private var helperList: List<CharacterView> = listOf()
 
     fun getListCharacters(){
 
         showProgressBar(true)
         showEmptyView(false)
+        showCharactersList(false)
 
         viewModelScope.launch(mainDispatcher) {
+
             when(val data = getListCharactersUseCase.getRepositoryData()){
                 is DataState.Success -> {
                     sendDataToView(data.value)
                     helperList = data.value
                 }
-                is DataState.Failure -> sendErrorMessage(data.errorMessage)
+                is DataState.Failure -> {
+                    sendErrorMessage(data.errorMessage)
+                }
             }
         }
     }
@@ -69,12 +79,14 @@ class ListCharactersViewModel @Inject constructor(
         _listCharacters.value = data
         showProgressBar(false)
         showEmptyView(false)
+        showCharactersList(true)
     }
 
     private fun sendErrorMessage(message: String?) {
         _errorMessage.value = message
         showProgressBar(false)
         showEmptyView(true)
+        showCharactersList(false)
     }
 
     private fun showEmptyView(show: Boolean){
@@ -83,5 +95,9 @@ class ListCharactersViewModel @Inject constructor(
 
     private fun showProgressBar(show: Boolean){
         _progressBar.value = show
+    }
+
+    private fun showCharactersList(show: Boolean){
+        _container.value = show
     }
 }

@@ -1,15 +1,10 @@
 package com.example.truelogicappchallenge.presentation.ui
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Visibility
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.truelogicappchallenge.R
 import com.example.truelogicappchallenge.databinding.ActivityMainBinding
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,8 +12,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ListCharactersAdapter.ItemClickedInterface {
 
-    private val viewmodel: ListCharactersViewModel by viewModels<ListCharactersViewModel>()
+    private val viewmodel: ListCharactersViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: ListCharactersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,51 +22,67 @@ class MainActivity : AppCompatActivity(), ListCharactersAdapter.ItemClickedInter
         val view = binding.root
         setContentView(view)
 
+        setRecyclerView()
         setObservers()
-        getListData()
+        getListCharacters()
     }
 
     private fun setObservers(){
 
-        viewmodel.listCharacters.observe(this, Observer { data ->
-            binding.recyclerView.layoutManager = LinearLayoutManager(this)
-            binding.recyclerView.setHasFixedSize(true)
-            binding.recyclerView.adapter = ListCharactersAdapter(data,this)
-        })
+        viewmodel.listCharacters.observe(this) { data ->
+            adapter.setList(data)
+        }
 
-        viewmodel.progressBar.observe(this, Observer {
+        viewmodel.progressBar.observe(this) {
             it?.let {
-               showProgressBar(it)
+                showProgressBar(it)
             }
-        })
+        }
 
-        viewmodel.emptyView.observe(this, Observer {
+        viewmodel.emptyView.observe(this) {
             it?.let {
                 showEmptyView(it)
             }
-        })
+        }
 
-        viewmodel.errorMessage.observe(this, Observer {
+        viewmodel.container.observe(this) {
+            it?.let {
+                showListCharactersContainer(it)
+            }
+        }
+
+        viewmodel.errorMessage.observe(this) {
             it?.let {
                 setErrorMessage(it)
             }
-        })
+        }
 
     }
 
-    private fun showEmptyView(show: Boolean) {
-        binding.emptyView.visibility = if (show) View.VISIBLE else View.GONE
+    private fun setRecyclerView(){
+        adapter = ListCharactersAdapter(listOf(), this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter = adapter
     }
 
     private fun setErrorMessage(message: String) {
         binding.emptyView.text = message
     }
 
+    private fun showEmptyView(show: Boolean) {
+        binding.emptyView.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
     private fun showProgressBar(show: Boolean) {
         binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-    private fun getListData(){
+    private fun showListCharactersContainer(show: Boolean) {
+        binding.recyclerView.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    private fun getListCharacters(){
         viewmodel.getListCharacters()
     }
 
