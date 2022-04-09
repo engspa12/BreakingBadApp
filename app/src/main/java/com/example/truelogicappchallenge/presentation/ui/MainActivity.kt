@@ -87,6 +87,6 @@ class MainActivity : AppCompatActivity(), ListCharactersAdapter.ItemClickedInter
     }
 
     override fun onClickedItem(position: Int) {
-        viewmodel.saveItemAsFavorite(position)
+        viewmodel.updateFavoriteStatus(position)
     }
 }

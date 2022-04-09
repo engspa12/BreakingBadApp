@@ -60,19 +60,9 @@ class CharactersRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getListFavorites(): List<CharacterCache> {
-        return withContext(coroutineDispatcher) {
-            db.getFavorites()
-        }
-    }
-
     override suspend fun handleFavorite(nameFavoriteItem: String, isFavorite: Boolean) {
         withContext(coroutineDispatcher){
-            if(isFavorite){
-                db.updateFavorite(nameFavoriteItem, false)
-            } else {
-                db.updateFavorite(nameFavoriteItem, true)
-            }
+            db.updateFavorite(nameFavoriteItem, !isFavorite)
         }
     }
 

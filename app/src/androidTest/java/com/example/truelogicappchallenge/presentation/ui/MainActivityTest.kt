@@ -49,8 +49,8 @@ class MainActivityTest {
     private lateinit var context: Context
     private lateinit var scenario: ActivityScenario<MainActivity>
 
-    val captorString: ArgumentCaptor<String> = ArgumentCaptor.forClass(String::class.java)
-    val captorBoolean: ArgumentCaptor<Boolean> = ArgumentCaptor.forClass(Boolean::class.java)
+    val captorName: ArgumentCaptor<String> = ArgumentCaptor.forClass(String::class.java)
+    val captorIsFavorite: ArgumentCaptor<Boolean> = ArgumentCaptor.forClass(Boolean::class.java)
 
     @Suppress("UNCHECKED_CAST")
     private fun <T> capture(captor: ArgumentCaptor<T>): T = captor.capture()
@@ -109,12 +109,14 @@ class MainActivityTest {
                 RecyclerViewActions
                 .actionOnItemAtPosition<ListCharactersAdapter.ListCharacterHolder>(0, onClickViewChild(R.id.favoriteIcon)))
 
-            onView(allOf(withId(R.id.favoriteIcon), withImageResourceView(R.drawable.ic_favorite))).check(matches(isDisplayed()))
+            onView(allOf(withId(R.id.favoriteIcon), withImageResourceView(R.drawable.ic_favorite), withContentDescription("Favorite_0"))).check(matches(isDisplayed()))
+            onView(allOf(withId(R.id.favoriteIcon), withImageResourceView(R.drawable.ic_no_favorite), withContentDescription("No_favorite_1"))).check(matches(isDisplayed()))
+            onView(allOf(withId(R.id.favoriteIcon), withImageResourceView(R.drawable.ic_no_favorite), withContentDescription("No_favorite_2"))).check(matches(isDisplayed()))
 
-            verify(handleFavoriteUseCase, times(1)).handleFavorite(capture(captorString), capture(captorBoolean))
+            verify(handleFavoriteUseCase, times(1)).updateFavoriteStatus(capture(captorName), capture(captorIsFavorite))
             verify(getListCharactersUseCase, times(2)).getRepositoryData()
-            assertThat(captorString.value).isEqualTo("name 0")
-            assertThat(captorBoolean.value).isEqualTo(false)
+            assertThat(captorName.value).isEqualTo("name 0")
+            assertThat(captorIsFavorite.value).isEqualTo(false)
         }
     }
 
@@ -143,7 +145,7 @@ class MainActivityTest {
         scenario.close()
     }
 
-    suspend fun succesfulResponse(){
+    private suspend fun succesfulResponse(){
 
         val list = ArrayList<CharacterView>()
 
@@ -156,14 +158,14 @@ class MainActivityTest {
         )
     }
 
-    suspend fun failureResponse() {
+    private suspend fun failureResponse() {
         Mockito.`when`(getListCharactersUseCase.getRepositoryData()).thenReturn(
             DataState.Failure("There is an error message")
         )
     }
 
-    suspend fun setFavoriteCase() {
-        Mockito.`when`(handleFavoriteUseCase.handleFavorite(any(), any())).thenReturn(Unit)
+    private suspend fun setFavoriteCase() {
+        Mockito.`when`(handleFavoriteUseCase.updateFavoriteStatus(any(), any())).thenReturn(Unit)
 
         val listWithoutFavorites = ArrayList<CharacterView>()
 

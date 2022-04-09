@@ -26,6 +26,5 @@ class UseCaseModule {
         charactersRepository: CharactersRepository
     ): HandleFavoritesUseCase {
         return HandleFavoritesUseCaseImpl(charactersRepository)
-
     }
 }

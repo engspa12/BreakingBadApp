@@ -16,12 +16,12 @@ class GetListCharactersUseCaseImpl @Inject constructor(
 
         return when(val data = charactersRepository.getListCharacters()){
                 is ResponseData.Success -> {
-                    val filteredList = data.value.sortedWith(compareBy({ !it.isFavorite }, { it.id}))
+                    val filteredList = data.value.sortedWith(compareBy({ !it.isFavorite }, { it.id }))
                     val originalList = filteredList.map { it.toView() }
                     DataState.Success(originalList)
                 }
                 is ResponseData.Failure -> {
-                    DataState.Failure("Error")
+                    DataState.Failure(data.errorMessage)
                 }
         }
     }

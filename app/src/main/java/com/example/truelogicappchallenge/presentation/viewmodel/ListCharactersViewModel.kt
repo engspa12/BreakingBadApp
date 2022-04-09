@@ -13,7 +13,6 @@ import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -45,9 +44,11 @@ class ListCharactersViewModel @Inject constructor(
         get() = _container
 
     private var helperList: List<CharacterView> = listOf()
+    private var countingIdlingResource: CountingIdlingResource? = null
 
     fun getListCharacters(){
 
+        incrementIdlingResource()
         showProgressBar(true)
         showEmptyView(false)
         showCharactersList(false)
@@ -58,18 +59,20 @@ class ListCharactersViewModel @Inject constructor(
                 is DataState.Success -> {
                     sendDataToView(data.value)
                     helperList = data.value
+                    decrementIdlingResouce()
                 }
                 is DataState.Failure -> {
                     sendErrorMessage(data.errorMessage)
+                    decrementIdlingResouce()
                 }
             }
         }
     }
 
-    fun saveItemAsFavorite(position: Int){
+    fun updateFavoriteStatus(position: Int){
         viewModelScope.launch(mainDispatcher) {
             val itemSelected = helperList[position]
-            handleFavoriteUseCase.handleFavorite(itemSelected.name, itemSelected.isFavorite)
+            handleFavoriteUseCase.updateFavoriteStatus(itemSelected.name, itemSelected.isFavorite)
             getListCharacters()
         }
 
@@ -99,5 +102,18 @@ class ListCharactersViewModel @Inject constructor(
 
     private fun showCharactersList(show: Boolean){
         _container.value = show
+    }
+
+    fun incrementIdlingResource(){
+        countingIdlingResource?.increment()
+    }
+
+    fun decrementIdlingResouce(){
+        countingIdlingResource?.decrement()
+    }
+
+    @VisibleForTesting
+    fun setIdlingResource(countingIdlingResource: CountingIdlingResource){
+        this.countingIdlingResource = countingIdlingResource
     }
 }

@@ -58,9 +58,11 @@ class ListCharactersAdapter(
 
            val favoriteIcon = if(list[position].isFavorite) {
                favoriteImageView.tag = R.drawable.ic_favorite
+               favoriteImageView.contentDescription = "Favorite_${position}"
                R.drawable.ic_favorite
            } else {
                favoriteImageView.tag = R.drawable.ic_no_favorite
+               favoriteImageView.contentDescription = "No_favorite_${position}"
                R.drawable.ic_no_favorite
            }
 
