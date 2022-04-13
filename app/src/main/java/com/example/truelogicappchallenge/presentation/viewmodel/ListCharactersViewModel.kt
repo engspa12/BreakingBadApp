@@ -44,11 +44,12 @@ class ListCharactersViewModel @Inject constructor(
         get() = _container
 
     private var helperList: List<CharacterView> = listOf()
-    private var countingIdlingResource: CountingIdlingResource? = null
+    private var countingIdlingResource1: CountingIdlingResource? = null
+    private var countingIdlingResource2: CountingIdlingResource? = null
 
     fun getListCharacters(){
 
-        incrementIdlingResource()
+        incrementIdlingResourceAPICall()
         showProgressBar(true)
         showEmptyView(false)
         showCharactersList(false)
@@ -59,21 +60,23 @@ class ListCharactersViewModel @Inject constructor(
                 is DataState.Success -> {
                     sendDataToView(data.value)
                     helperList = data.value
-                    decrementIdlingResouce()
+                    decrementIdlingResourceAPICall()
                 }
                 is DataState.Failure -> {
                     sendErrorMessage(data.errorMessage)
-                    decrementIdlingResouce()
+                    decrementIdlingResourceAPICall()
                 }
             }
         }
     }
 
     fun updateFavoriteStatus(position: Int){
+        incrementIdlingResourceFavoriteStatus()
         viewModelScope.launch(mainDispatcher) {
             val itemSelected = helperList[position]
             handleFavoriteUseCase.updateFavoriteStatus(itemSelected.name, itemSelected.isFavorite)
             getListCharacters()
+            decrementIdlingResourceFavoriteStatus()
         }
 
     }
@@ -104,16 +107,29 @@ class ListCharactersViewModel @Inject constructor(
         _container.value = show
     }
 
-    fun incrementIdlingResource(){
-        countingIdlingResource?.increment()
+    private fun incrementIdlingResourceAPICall(){
+        countingIdlingResource1?.increment()
     }
 
-    fun decrementIdlingResouce(){
-        countingIdlingResource?.decrement()
+    private fun decrementIdlingResourceAPICall(){
+        countingIdlingResource1?.decrement()
+    }
+
+    private fun incrementIdlingResourceFavoriteStatus(){
+        countingIdlingResource2?.increment()
+    }
+
+    private fun decrementIdlingResourceFavoriteStatus(){
+        countingIdlingResource2?.decrement()
     }
 
     @VisibleForTesting
-    fun setIdlingResource(countingIdlingResource: CountingIdlingResource){
-        this.countingIdlingResource = countingIdlingResource
+    fun setIdlingResourceAPICall(countingIdlingResource: CountingIdlingResource){
+        this.countingIdlingResource1 = countingIdlingResource
+    }
+
+    @VisibleForTesting
+    fun setIdlingResourceUpdateFavorite(countingIdlingResource: CountingIdlingResource){
+        this.countingIdlingResource2 = countingIdlingResource
     }
 }
