@@ -14,14 +14,14 @@ class GetListCharactersUseCaseImpl @Inject constructor(
 
     override suspend fun getRepositoryData(): DataState<List<CharacterView>> {
 
-        return when(val data = charactersRepository.getListCharacters()){
+        return when(val repositoryData = charactersRepository.getListCharacters()){
                 is ResponseData.Success -> {
-                    val filteredList = data.value.sortedWith(compareBy({ !it.isFavorite }, { it.id }))
+                    val filteredList = repositoryData.value.sortedWith(compareBy({ !it.isFavorite }, { it.id }))
                     val originalList = filteredList.map { it.toView() }
                     DataState.Success(originalList)
                 }
                 is ResponseData.Failure -> {
-                    DataState.Failure(data.errorMessage)
+                    DataState.Failure(repositoryData.errorMessage)
                 }
         }
     }

@@ -13,6 +13,7 @@ import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -55,7 +56,8 @@ class ListCharactersViewModel @Inject constructor(
         showCharactersList(false)
 
         viewModelScope.launch(mainDispatcher) {
-
+            //Only to see the ProgressBar in the UI
+            delay(200L)
             when(val data = getListCharactersUseCase.getRepositoryData()){
                 is DataState.Success -> {
                     sendDataToView(data.value)
