@@ -11,6 +11,8 @@ import com.example.truelogicappchallenge.domain.ResponseData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject
@@ -51,6 +53,14 @@ class CharactersRepositoryImpl @Inject constructor(
             }
         }
 
+    }
+
+    override suspend fun getCharacterDetails(id: Int): Flow<CharacterDomain> {
+        return withContext(coroutineDispatcher) {
+            db.getCharacter(id).map {
+                cacheMapper.mapToDomainModel(it)
+            }
+        }
     }
 
     private suspend fun insertDataToCache(domainData: List<CharacterDomain>) {

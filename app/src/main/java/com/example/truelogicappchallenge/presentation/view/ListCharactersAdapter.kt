@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.ui
+package com.example.truelogicappchallenge.presentation.view
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.ui
+package com.example.truelogicappchallenge.presentation.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

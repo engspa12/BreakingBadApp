@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.ui
+package com.example.truelogicappchallenge.presentation.view
 
 import android.content.Context
 import androidx.test.core.app.ActivityScenario
@@ -14,7 +14,6 @@ import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.truelogicappchallenge.R
 import com.example.truelogicappchallenge.di.DispatchersModule
-import com.example.truelogicappchallenge.di.UseCaseModule
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.onClickViewChild
@@ -23,19 +22,16 @@ import com.example.truelogicappchallenge.withImageResourceView
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.hamcrest.CoreMatchers
 import org.junit.After
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
 @OptIn(ExperimentalCoroutinesApi::class)

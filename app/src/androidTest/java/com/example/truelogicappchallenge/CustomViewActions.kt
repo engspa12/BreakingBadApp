@@ -1,12 +1,9 @@
 package com.example.truelogicappchallenge
 
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.matcher.ViewMatchers
-import com.example.truelogicappchallenge.presentation.ui.ListCharactersAdapter
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher

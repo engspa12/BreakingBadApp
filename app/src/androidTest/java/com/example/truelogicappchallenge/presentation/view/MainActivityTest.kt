@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.ui
+package com.example.truelogicappchallenge.presentation.view
 
 import android.content.Context
 import androidx.test.core.app.ActivityScenario

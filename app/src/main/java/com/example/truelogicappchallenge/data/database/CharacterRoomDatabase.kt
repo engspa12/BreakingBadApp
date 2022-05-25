@@ -2,6 +2,7 @@ package com.example.truelogicappchallenge.data.database
 
 import androidx.room.*
 import com.example.truelogicappchallenge.data.database.dto.CharacterCache
+import kotlinx.coroutines.flow.Flow
 
 @Database(
     entities = [
@@ -24,5 +25,8 @@ interface CharactersDao{
 
     @Query("UPDATE favorites SET isFavorite = :isFavorite WHERE characterName = :itemName")
     fun updateFavorite(itemName: String, isFavorite: Boolean)
+
+    @Query("SELECT * FROM favorites WHERE id = :id")
+    fun getCharacter(id: Int) : Flow<CharacterCache>
 
 }
