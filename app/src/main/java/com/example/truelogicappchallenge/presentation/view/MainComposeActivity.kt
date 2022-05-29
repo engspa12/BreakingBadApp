@@ -24,6 +24,7 @@ import com.example.truelogicappchallenge.global.Screen
 import com.example.truelogicappchallenge.presentation.view.detail.DetailScreen
 import com.example.truelogicappchallenge.presentation.view.main.MainScreen
 import com.example.truelogicappchallenge.presentation.view.ui.theme.TruelogicAppChallengeTheme
+import com.example.truelogicappchallenge.presentation.viewmodel.CharacterDetailsViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,10 +55,16 @@ fun DefaultPreview() {
             color = MaterialTheme.colors.background
         ) {
             DetailScreen(
-                "name",
-                "nickname",
-                "https://s-i.huffpost.com/gen/1317262/images/o-ANNA-GUNN-facebook.jpg",
-                true)
+                name = "Adriana",
+                nickname = "Adri",
+                img = "https://s-i.huffpost.com/gen/1317262/images/o-ANNA-GUNN-facebook.jpg",
+                isFavorite = true,
+                {
+
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 20.dp))
         }
     }
 }
@@ -72,42 +79,16 @@ fun AppScreen() {
             composable(
                 route = Screen.MainScreen.route) {
                 val listCharactersViewModel = hiltViewModel<ListCharactersViewModel>()
-                MainScreen(navController = navController, listCharactersViewModel)
+                MainScreen(
+                    navController = navController, 
+                    listCharactersViewModel =  listCharactersViewModel)
             }
             composable(
-                route = Screen.DetailScreen.route + "/{name}/{nickname}/{img}/{isFavorite}",
-                arguments = listOf(
-                    navArgument("name") {
-                        type = NavType.StringType
-                        defaultValue = ""
-                        nullable = false
-                    },
-                    navArgument("nickname") {
-                        type = NavType.StringType
-                        defaultValue = ""
-                        nullable = false
-                    },
-                    navArgument("img") {
-                        type = NavType.StringType
-                        defaultValue = ""
-                        nullable = false
-                    },
-                    navArgument("isFavorite") {
-                        type = NavType.BoolType
-                        defaultValue = false
-                        nullable = false
-                    }
-                )
-            ) { navBackStackEntry ->
-
+                route = Screen.DetailScreen.route
+            ) { 
+                val characterDetailsViewModel = hiltViewModel<CharacterDetailsViewModel>()
                 DetailScreen(
-                    name = navBackStackEntry.arguments?.getString("name") ?: "",
-                    nickname = navBackStackEntry.arguments?.getString("nickname") ?: "",
-                    img = navBackStackEntry.arguments?.getString("img") ?: "",
-                    isFavorite = navBackStackEntry.arguments?.getBoolean("isFavorite") ?: false,
-                    modifier =  Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 20.dp)
+                    characterDetailsViewModel = characterDetailsViewModel
                 )
             }
         }

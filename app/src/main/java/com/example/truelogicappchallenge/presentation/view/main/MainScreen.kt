@@ -42,7 +42,7 @@ fun MainScreen(
             lazyState,
             list,
             { characterView ->
-                navController.navigate(Screen.DetailScreen.withArgsDiffType(characterView))
+                navController.navigate(Screen.DetailScreen.route)
                 //navController.navigate("testgraph")
             }
         )

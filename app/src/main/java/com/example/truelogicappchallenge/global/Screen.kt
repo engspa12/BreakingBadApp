@@ -17,7 +17,7 @@ sealed class Screen(val route: String) {
         }
     }
 
-    fun withArgsDiffType(characterView: CharacterView ): String {
+    fun withArgsDiffType(characterView: CharacterView): String {
         return buildString {
             val urlEncoded = URLEncoder.encode(characterView.img, StandardCharsets.UTF_8.toString())
             val partialString = withArgs(characterView.name, characterView.nickname, urlEncoded)

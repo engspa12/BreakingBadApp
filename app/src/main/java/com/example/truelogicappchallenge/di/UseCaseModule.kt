@@ -1,10 +1,7 @@
 package com.example.truelogicappchallenge.di
 
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
-import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
-import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCaseImpl
-import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
-import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCaseImpl
+import com.example.truelogicappchallenge.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +26,12 @@ class UseCaseModule {
         charactersRepository: CharactersRepository
     ): HandleFavoritesUseCase {
         return HandleFavoritesUseCaseImpl(charactersRepository)
+    }
+
+    @Provides
+    fun provideGetItemDetailsUseCase(
+        charactersRepository: CharactersRepository
+    ): GetItemDetailsUseCase {
+        return GetItemDetailsUseCaseImpl(charactersRepository)
     }
 }
