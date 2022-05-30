@@ -84,10 +84,18 @@ fun AppScreen() {
                     listCharactersViewModel =  listCharactersViewModel)
             }
             composable(
-                route = Screen.DetailScreen.route
-            ) { 
+                route = Screen.DetailScreen.route + "/{name}",
+                arguments = listOf(
+                    navArgument("name") {
+                        type = NavType.StringType
+                        defaultValue = ""
+                        nullable = false
+                    }
+                )
+            ) { entry ->
                 val characterDetailsViewModel = hiltViewModel<CharacterDetailsViewModel>()
                 DetailScreen(
+                    name = entry.arguments?.getString("name") ?: "",
                     characterDetailsViewModel = characterDetailsViewModel
                 )
             }

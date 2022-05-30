@@ -27,12 +27,13 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun DetailScreen(
+    name: String,
     characterDetailsViewModel: CharacterDetailsViewModel) {
 
     val uiState by characterDetailsViewModel.itemUIState.collectAsState()
     
     LaunchedEffect(key1 = Unit) {
-        characterDetailsViewModel.getItemDetails(1)
+        characterDetailsViewModel.getItemDetails(name)
     }
 
     when(uiState) {

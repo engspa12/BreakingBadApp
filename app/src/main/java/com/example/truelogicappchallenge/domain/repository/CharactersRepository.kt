@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface CharactersRepository {
     suspend fun getListCharacters(): ResponseData<List<CharacterDomain>>
-    suspend fun getCharacterDetails(id: Int): Flow<CharacterDomain>
+    suspend fun getCharacterDetails(name: String): Flow<CharacterDomain>
     suspend fun handleFavorite(nameFavoriteItem: String, isFavorite: Boolean)
 }

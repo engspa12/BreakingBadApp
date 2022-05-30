@@ -55,9 +55,9 @@ class CharactersRepositoryImpl @Inject constructor(
 
     }
 
-    override suspend fun getCharacterDetails(id: Int): Flow<CharacterDomain> {
+    override suspend fun getCharacterDetails(name: String): Flow<CharacterDomain> {
         return withContext(coroutineDispatcher) {
-            db.getCharacter(id).map {
+            db.getCharacter(name).map {
                 cacheMapper.mapToDomainModel(it)
             }
         }

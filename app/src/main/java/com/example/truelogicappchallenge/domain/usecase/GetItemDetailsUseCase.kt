@@ -4,5 +4,5 @@ import com.example.truelogicappchallenge.presentation.model.CharacterView
 import kotlinx.coroutines.flow.Flow
 
 interface GetItemDetailsUseCase {
-    suspend fun getItemDetails(id: Int): Flow<CharacterView>
+    suspend fun getItemDetails(name: String): Flow<CharacterView>
 }

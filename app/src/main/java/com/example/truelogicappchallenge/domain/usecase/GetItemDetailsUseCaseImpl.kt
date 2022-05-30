@@ -10,8 +10,8 @@ class GetItemDetailsUseCaseImpl(
     private val charactersRepository: CharactersRepository
 ): GetItemDetailsUseCase {
 
-    override suspend fun getItemDetails(id: Int): Flow<CharacterView> {
-        return charactersRepository.getCharacterDetails(id).map {
+    override suspend fun getItemDetails(name: String): Flow<CharacterView> {
+        return charactersRepository.getCharacterDetails(name).map {
             it.toView()
         }
     }

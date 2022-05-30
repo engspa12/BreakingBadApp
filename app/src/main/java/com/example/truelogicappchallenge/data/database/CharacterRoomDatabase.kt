@@ -26,7 +26,7 @@ interface CharactersDao{
     @Query("UPDATE favorites SET isFavorite = :isFavorite WHERE characterName = :itemName")
     fun updateFavorite(itemName: String, isFavorite: Boolean)
 
-    @Query("SELECT * FROM favorites WHERE id = :id")
-    fun getCharacter(id: Int) : Flow<CharacterCache>
+    @Query("SELECT * FROM favorites WHERE characterName = :name")
+    fun getCharacter(name: String) : Flow<CharacterCache>
 
 }

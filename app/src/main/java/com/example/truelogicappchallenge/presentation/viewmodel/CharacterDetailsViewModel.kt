@@ -26,9 +26,9 @@ class CharacterDetailsViewModel @Inject constructor(
     private val _itemUIState = MutableStateFlow<CharacterItemUIState>(CharacterItemUIState.Progress(""))
     val itemUIState: StateFlow<CharacterItemUIState> = _itemUIState
 
-    fun getItemDetails(id: Int) {
+    fun getItemDetails(name: String) {
         viewModelScope.launch(mainDispatcher) {
-            getItemDetailsUseCase.getItemDetails(id).collect { characterView ->
+            getItemDetailsUseCase.getItemDetails(name).collect { characterView ->
                 _itemUIState.value = CharacterItemUIState.Success(characterView)
             }
         }
