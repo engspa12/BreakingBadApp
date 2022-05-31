@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.truelogicappchallenge.global.Screen
+import com.example.truelogicappchallenge.presentation.state.CharactersListUIState
 import com.example.truelogicappchallenge.presentation.view.components.CharactersListComponent
 import com.example.truelogicappchallenge.presentation.view.components.ErrorTextComponent
 import com.example.truelogicappchallenge.presentation.view.components.ProgressBarComponent
@@ -26,46 +28,43 @@ fun MainScreen(
 ){
 
     val lazyState = rememberLazyListState()
-
-    val list by listCharactersViewModel.listCharacters.observeAsState()
-    val progressBar by listCharactersViewModel.progressBar.observeAsState()
-    val emptyView by listCharactersViewModel.emptyView.observeAsState()
-    val errorMessage by listCharactersViewModel.errorMessage.observeAsState()
-    val container by listCharactersViewModel.container.observeAsState()
+    val uiState by listCharactersViewModel.mainUIState.collectAsState()
 
     LaunchedEffect(key1 = Unit) {
         listCharactersViewModel.getListCharacters()
     }
 
-    if(container == true && emptyView == false && progressBar == false) {
-        CharactersListComponent(
-            lazyState,
-            list,
-            { characterView ->
-                navController.navigate(Screen.DetailScreen.withArgs(characterView.name))
-                //navController.navigate("testgraph")
+    when(uiState) {
+        is CharactersListUIState.Success -> {
+            (uiState as CharactersListUIState.Success).data?.let { list ->
+                CharactersListComponent(
+                    lazyState,
+                    list,
+                    { characterView ->
+                        navController.navigate(Screen.DetailScreen.withArgs(characterView.name))
+                    }
+                )
+                { index ->
+                    listCharactersViewModel.updateFavoriteStatus(index)
+                }
             }
-        )
-        { index ->
-                listCharactersViewModel.updateFavoriteStatus(index)
         }
-    }
-
-    if(emptyView == true && container == false && progressBar == false){
-        ErrorTextComponent(
-            errorMessage = errorMessage ?: "",
-            modifier = Modifier
-                .fillMaxSize()
-                .wrapContentHeight(Alignment.CenterVertically)
-                .padding(horizontal = 20.dp))
-    }
-
-    if(progressBar == true && container == false && emptyView == false){
-        ProgressBarComponent(
-            modifier = Modifier
-                .fillMaxSize()
-                .requiredSize(60.dp)
-                .wrapContentHeight(Alignment.CenterVertically))
+        is CharactersListUIState.Progress -> {
+            ProgressBarComponent(
+                message = (uiState as CharactersListUIState.Progress).loadingMessage,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentHeight(Alignment.CenterVertically)
+            )
+        }
+        is CharactersListUIState.Error -> {
+            ErrorTextComponent(
+                errorMessage = (uiState as CharactersListUIState.Error).error,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentHeight(Alignment.CenterVertically)
+                    .padding(horizontal = 20.dp))
+        }
     }
 }
 

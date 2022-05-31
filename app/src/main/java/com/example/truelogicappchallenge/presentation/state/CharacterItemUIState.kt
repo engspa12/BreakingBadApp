@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation
+package com.example.truelogicappchallenge.presentation.state
 
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 

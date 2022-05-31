@@ -3,13 +3,12 @@ package com.example.truelogicappchallenge.presentation.view
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.truelogicappchallenge.global.Screen
+import com.example.truelogicappchallenge.presentation.view.components.ProgressBarComponent
 import com.example.truelogicappchallenge.presentation.view.detail.DetailScreen
 import com.example.truelogicappchallenge.presentation.view.main.MainScreen
 import com.example.truelogicappchallenge.presentation.view.ui.theme.TruelogicAppChallengeTheme
@@ -54,17 +54,12 @@ fun DefaultPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            DetailScreen(
-                name = "Adriana",
-                nickname = "Adri",
-                img = "https://s-i.huffpost.com/gen/1317262/images/o-ANNA-GUNN-facebook.jpg",
-                isFavorite = true,
-                {
-
-                },
+            ProgressBarComponent(
+                message = "Hello Progress",
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 20.dp))
+                    .fillMaxSize()
+                    .wrapContentHeight(Alignment.CenterVertically)
+            )
         }
     }
 }

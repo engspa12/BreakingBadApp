@@ -23,11 +23,11 @@ class MainActivity : AppCompatActivity(), ListCharactersAdapter.ItemClickedInter
         setContentView(view)
 
         setRecyclerView()
-        setObservers()
+        //setObservers()
         getListCharacters()
     }
 
-    private fun setObservers(){
+    /*private fun setObservers(){
 
         viewmodel.listCharacters.observe(this) { data ->
             adapter.setList(data)
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), ListCharactersAdapter.ItemClickedInter
             }
         }
 
-    }
+    }*/
 
     private fun setRecyclerView(){
         adapter = ListCharactersAdapter(listOf(), this)

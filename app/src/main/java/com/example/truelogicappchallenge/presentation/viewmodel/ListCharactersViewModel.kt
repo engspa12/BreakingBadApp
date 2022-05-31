@@ -11,9 +11,12 @@ import com.example.truelogicappchallenge.domain.DataState
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
+import com.example.truelogicappchallenge.presentation.state.CharactersListUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,25 +27,9 @@ class ListCharactersViewModel @Inject constructor(
     @DispatchersModule.MainDispatcher private val mainDispatcher: CoroutineDispatcher
 ): ViewModel() {
 
-    private val _listCharacters = MutableLiveData<List<CharacterView>>()
-    val listCharacters: LiveData<List<CharacterView>>
-        get() = _listCharacters
-
-    private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage: LiveData<String?>
-        get() = _errorMessage
-
-    private val _progressBar = MutableLiveData<Boolean?>()
-    val progressBar: LiveData<Boolean?>
-        get() = _progressBar
-
-    private val _emptyView = MutableLiveData<Boolean?>()
-    val emptyView: LiveData<Boolean?>
-        get() = _emptyView
-
-    private val _container = MutableLiveData<Boolean?>()
-    val container: LiveData<Boolean?>
-        get() = _container
+    private val _mainUIState = MutableStateFlow<CharactersListUIState>(CharactersListUIState.Progress(""))
+    val mainUIState: StateFlow<CharactersListUIState>
+        get() = _mainUIState
 
     private var helperList: List<CharacterView> = listOf()
     private var countingIdlingResource1: CountingIdlingResource? = null
@@ -51,13 +38,10 @@ class ListCharactersViewModel @Inject constructor(
     fun getListCharacters(){
 
         incrementIdlingResourceAPICall()
-        showProgressBar(true)
-        showEmptyView(false)
-        showCharactersList(false)
-
+        showProgressBar("")
         viewModelScope.launch(mainDispatcher) {
             //Only to see the ProgressBar in the UI
-            delay(200L)
+            delay(500L)
             when(val data = getListCharactersUseCase.getRepositoryData()){
                 is DataState.Success -> {
                     sendDataToView(data.value)
@@ -65,7 +49,7 @@ class ListCharactersViewModel @Inject constructor(
                     decrementIdlingResourceAPICall()
                 }
                 is DataState.Failure -> {
-                    sendErrorMessage(data.errorMessage)
+                    sendErrorMessage(data.errorMessage ?: "")
                     decrementIdlingResourceAPICall()
                 }
             }
@@ -84,29 +68,15 @@ class ListCharactersViewModel @Inject constructor(
     }
 
     private fun sendDataToView(data: List<CharacterView>){
-        _listCharacters.value = data
-        showProgressBar(false)
-        showEmptyView(false)
-        showCharactersList(true)
+        _mainUIState.value = CharactersListUIState.Success(data)
     }
 
-    private fun sendErrorMessage(message: String?) {
-        _errorMessage.value = message
-        showProgressBar(false)
-        showEmptyView(true)
-        showCharactersList(false)
+    private fun sendErrorMessage(message: String) {
+        _mainUIState.value = CharactersListUIState.Error(message)
     }
 
-    private fun showEmptyView(show: Boolean){
-        _emptyView.value = show
-    }
-
-    private fun showProgressBar(show: Boolean){
-        _progressBar.value = show
-    }
-
-    private fun showCharactersList(show: Boolean){
-        _container.value = show
+    private fun showProgressBar(message: String) {
+        _mainUIState.value = CharactersListUIState.Progress(message)
     }
 
     private fun incrementIdlingResourceAPICall(){

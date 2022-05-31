@@ -5,14 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.usecase.GetItemDetailsUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
-import com.example.truelogicappchallenge.presentation.CharacterItemUIState
-import com.example.truelogicappchallenge.presentation.model.CharacterView
+import com.example.truelogicappchallenge.presentation.state.CharacterItemUIState
+import com.example.truelogicappchallenge.presentation.state.CharactersListUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,7 +26,9 @@ class CharacterDetailsViewModel @Inject constructor(
     val itemUIState: StateFlow<CharacterItemUIState> = _itemUIState
 
     fun getItemDetails(name: String) {
+        showProgressBar("")
         viewModelScope.launch(mainDispatcher) {
+            delay(500L)
             getItemDetailsUseCase.getItemDetails(name).collect { characterView ->
                 _itemUIState.value = CharacterItemUIState.Success(characterView)
             }
@@ -38,6 +39,10 @@ class CharacterDetailsViewModel @Inject constructor(
         viewModelScope.launch(mainDispatcher) {
             handleFavoriteUseCase.updateFavoriteStatus(name, isFavorite)
         }
+    }
+
+    private fun showProgressBar(message: String) {
+        _itemUIState.value = CharacterItemUIState.Progress(message)
     }
 }
 

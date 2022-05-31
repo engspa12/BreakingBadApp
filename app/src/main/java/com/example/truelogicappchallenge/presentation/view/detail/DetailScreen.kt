@@ -18,7 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.truelogicappchallenge.presentation.CharacterItemUIState
+import com.example.truelogicappchallenge.presentation.state.CharacterItemUIState
+import com.example.truelogicappchallenge.presentation.state.CharactersListUIState
 import com.example.truelogicappchallenge.presentation.view.components.ErrorTextComponent
 import com.example.truelogicappchallenge.presentation.view.components.ProgressBarComponent
 import com.example.truelogicappchallenge.presentation.viewmodel.CharacterDetailsViewModel
@@ -38,14 +39,14 @@ fun DetailScreen(
 
     when(uiState) {
         is CharacterItemUIState.Success -> {
-            (uiState as CharacterItemUIState.Success).data?.let {
+            (uiState as CharacterItemUIState.Success).data?.let { item ->
                 DetailScreen(
-                    name = it.name,
-                    nickname = it.nickname,
-                    img = it.img,
-                    isFavorite = it.isFavorite,
+                    name = item.name,
+                    nickname = item.nickname,
+                    img = item.img,
+                    isFavorite = item.isFavorite,
                     {
-                        characterDetailsViewModel.updateFavoriteFromDetail(it.name, it.isFavorite)
+                        characterDetailsViewModel.updateFavoriteFromDetail(item.name, item.isFavorite)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -54,13 +55,20 @@ fun DetailScreen(
             }
         }
         is CharacterItemUIState.Progress -> {
-            ProgressBarComponent(modifier = Modifier
-                .fillMaxSize()
-                .requiredSize(60.dp)
-                .wrapContentHeight(Alignment.CenterVertically))
+            ProgressBarComponent(
+                message = (uiState as CharacterItemUIState.Progress).loadingMessage,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentHeight(Alignment.CenterVertically)
+            )
         }
         is CharacterItemUIState.Error -> {
-            ErrorTextComponent(errorMessage = "There was an error while loading data")
+            ErrorTextComponent(
+                errorMessage = (uiState as CharacterItemUIState.Error).error,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentHeight(Alignment.CenterVertically)
+                    .padding(horizontal = 20.dp))
         }
     }
 }
