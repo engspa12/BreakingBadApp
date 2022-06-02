@@ -1,7 +1,6 @@
 package com.example.truelogicappchallenge.domain.repository
 
-import com.example.truelogicappchallenge.data.database.dto.CharacterCache
-import com.example.truelogicappchallenge.domain.ResponseData
+import com.example.truelogicappchallenge.data.helper.ResponseData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import kotlinx.coroutines.flow.Flow
 

@@ -1,13 +1,11 @@
 package com.example.truelogicappchallenge.presentation.viewmodel
 
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.test.espresso.idling.CountingIdlingResource
 import com.example.truelogicappchallenge.di.DispatchersModule
-import com.example.truelogicappchallenge.domain.DataState
+import com.example.truelogicappchallenge.domain.helper.DataState
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
@@ -38,10 +36,10 @@ class ListCharactersViewModel @Inject constructor(
     fun getListCharacters(){
 
         incrementIdlingResourceAPICall()
-        showProgressBar("")
+        showProgressBar("Loading list of items...")
         viewModelScope.launch(mainDispatcher) {
             //Only to see the ProgressBar in the UI
-            delay(500L)
+            delay(1000L)
             when(val data = getListCharactersUseCase.getRepositoryData()){
                 is DataState.Success -> {
                     sendDataToView(data.value)

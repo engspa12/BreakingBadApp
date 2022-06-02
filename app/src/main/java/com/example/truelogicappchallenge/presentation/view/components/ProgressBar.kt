@@ -23,7 +23,7 @@ fun ProgressBarComponent(message: String, modifier: Modifier = Modifier){
         )
         Text(
             text = message,
-            color = MaterialTheme.colors.primaryVariant,
+            color = MaterialTheme.colors.primary,
             modifier =
             Modifier.padding(vertical = 16.dp)
                 .align(alignment = Alignment.CenterHorizontally)

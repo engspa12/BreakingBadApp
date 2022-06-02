@@ -1,8 +1,8 @@
 package com.example.truelogicappchallenge.domain.usecase
 
 import androidx.test.filters.SmallTest
-import com.example.truelogicappchallenge.domain.DataState
-import com.example.truelogicappchallenge.domain.ResponseData
+import com.example.truelogicappchallenge.domain.helper.DataState
+import com.example.truelogicappchallenge.data.helper.ResponseData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import com.google.common.truth.Truth.assertThat

@@ -1,7 +1,7 @@
 package com.example.truelogicappchallenge.domain.usecase
 
-import com.example.truelogicappchallenge.domain.DataState
-import com.example.truelogicappchallenge.domain.ResponseData
+import com.example.truelogicappchallenge.domain.helper.DataState
+import com.example.truelogicappchallenge.data.helper.ResponseData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import com.example.truelogicappchallenge.presentation.model.CharacterView

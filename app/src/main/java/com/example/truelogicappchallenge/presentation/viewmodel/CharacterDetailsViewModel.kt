@@ -1,5 +1,6 @@
 package com.example.truelogicappchallenge.presentation.viewmodel
 
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.truelogicappchallenge.di.DispatchersModule
@@ -26,9 +27,10 @@ class CharacterDetailsViewModel @Inject constructor(
     val itemUIState: StateFlow<CharacterItemUIState> = _itemUIState
 
     fun getItemDetails(name: String) {
-        showProgressBar("")
+        showProgressBar("Loading item data...")
         viewModelScope.launch(mainDispatcher) {
-            delay(500L)
+            //Only to see the ProgressBar in the UI
+            delay(1000L)
             getItemDetailsUseCase.getItemDetails(name).collect { characterView ->
                 _itemUIState.value = CharacterItemUIState.Success(characterView)
             }

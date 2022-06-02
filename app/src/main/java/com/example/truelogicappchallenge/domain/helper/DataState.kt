@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.domain
+package com.example.truelogicappchallenge.domain.helper
 
 sealed class DataState<T> {
     data class Success<T>(val value: T): DataState<T>()

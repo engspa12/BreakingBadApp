@@ -10,7 +10,7 @@ import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.truelogicappchallenge.*
 import com.example.truelogicappchallenge.di.UseCaseModule
-import com.example.truelogicappchallenge.domain.DataState
+import com.example.truelogicappchallenge.domain.helper.DataState
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView

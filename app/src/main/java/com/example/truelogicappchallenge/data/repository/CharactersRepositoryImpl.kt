@@ -7,7 +7,7 @@ import com.example.truelogicappchallenge.data.network.responses.CharacterNetwork
 import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.CacheMapper
 import com.example.truelogicappchallenge.domain.NetworkMapper
-import com.example.truelogicappchallenge.domain.ResponseData
+import com.example.truelogicappchallenge.data.helper.ResponseData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import kotlinx.coroutines.CoroutineDispatcher
