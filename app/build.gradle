@@ -76,11 +76,17 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+    //Glide,Coil for Compose
     implementation "com.github.skydoves:landscapist-glide:1.5.1"
 
     //Retrofit 2.0
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    //Moshi
+    implementation 'com.squareup.moshi:moshi:1.13.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.13.0'
 
     //OkHttp
     implementation 'com.squareup.okhttp3:okhttp:3.14.9'

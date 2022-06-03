@@ -1,30 +1,33 @@
 package com.example.truelogicappchallenge.data.network.responses
 
 import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class CharacterNetwork (
 
-    @SerializedName("char_id")
+    @Json(name = "char_id")
     var charId: Int? = null,
-    @SerializedName("name")
+    @Json(name = "name")
     var name : String? = null,
-    @SerializedName("birthday")
+    @Json(name = "birthday")
     var birthday : String? = null,
-    @SerializedName("occupation")
+    @Json(name ="occupation")
     var occupation : List<String> = arrayListOf(),
-    @SerializedName("img")
+    @Json(name = "img")
     var img : String? = null,
-    @SerializedName("status")
+    @Json(name = "status")
     var status : String? = null,
-    @SerializedName("nickname")
+    @Json(name = "nickname")
     var nickname : String? = null,
-    @SerializedName("appearance")
+    @Json(name = "appearance")
     var appearance : List<Int> = arrayListOf(),
-    @SerializedName("portrayed")
+    @Json(name = "portrayed")
     var portrayed : String? = null,
-    @SerializedName("category")
+    @Json(name = "category")
     var category : String? = null,
-    @SerializedName("better_call_saul_appearance")
+    @Json(name = "better_call_saul_appearance")
     var betterCallSaulAppearance : List<String> = arrayListOf()
 
 )

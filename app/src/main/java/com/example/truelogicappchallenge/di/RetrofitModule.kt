@@ -1,12 +1,14 @@
 package com.example.truelogicappchallenge.di
 
 import com.example.truelogicappchallenge.data.network.ServiceApi
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -19,17 +21,21 @@ class RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(baseUrl: String): Retrofit{
+    fun provideMoshi() = Moshi.Builder().build()
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(baseUrl: String, mosh: Moshi): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(mosh))
             .build();
     }
 
     @Singleton
     @Provides
-    fun provideNewsService(): ServiceApi {
-        return provideRetrofit(BASE_URL).create(ServiceApi::class.java);
+    fun provideNewsService(mosh: Moshi): ServiceApi {
+        return provideRetrofit(BASE_URL, mosh).create(ServiceApi::class.java);
     }
 
 }
