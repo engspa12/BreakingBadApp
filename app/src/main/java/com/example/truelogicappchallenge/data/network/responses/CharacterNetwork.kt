@@ -1,6 +1,5 @@
 package com.example.truelogicappchallenge.data.network.responses
 
-import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

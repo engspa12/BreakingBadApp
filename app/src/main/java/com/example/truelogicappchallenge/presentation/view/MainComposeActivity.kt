@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +27,7 @@ import com.example.truelogicappchallenge.presentation.view.main.MainScreen
 import com.example.truelogicappchallenge.presentation.view.ui.theme.TruelogicAppChallengeTheme
 import com.example.truelogicappchallenge.presentation.viewmodel.CharacterDetailsViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
+import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -72,11 +74,17 @@ fun AppScreen() {
     NavHost(navController = navController, startDestination = "characters") {
         navigation(startDestination = Screen.MainScreen.route, route = "characters") {
             composable(
-                route = Screen.MainScreen.route) {
+                route = Screen.MainScreen.route) { backStackEntry ->
+                val parentEntry = remember(backStackEntry) {
+                    navController.getBackStackEntry("characters")
+                }
+                val parentViewModel = hiltViewModel<SharedViewModel>(parentEntry)
                 val listCharactersViewModel = hiltViewModel<ListCharactersViewModel>()
                 MainScreen(
                     navController = navController, 
-                    listCharactersViewModel =  listCharactersViewModel)
+                    listCharactersViewModel =  listCharactersViewModel,
+                    sharedViewModel = parentViewModel
+                )
             }
             composable(
                 route = Screen.DetailScreen.route + "/{name}",
@@ -87,11 +95,16 @@ fun AppScreen() {
                         nullable = false
                     }
                 )
-            ) { entry ->
+            ) { backStackEntry ->
+                val parentEntry = remember(backStackEntry) {
+                    navController.getBackStackEntry("characters")
+                }
+                val parentViewModel = hiltViewModel<SharedViewModel>(parentEntry)
                 val characterDetailsViewModel = hiltViewModel<CharacterDetailsViewModel>()
                 DetailScreen(
-                    name = entry.arguments?.getString("name") ?: "",
-                    characterDetailsViewModel = characterDetailsViewModel
+                    name = backStackEntry.arguments?.getString("name") ?: "",
+                    characterDetailsViewModel = characterDetailsViewModel,
+                    sharedViewModel = parentViewModel
                 )
             }
         }

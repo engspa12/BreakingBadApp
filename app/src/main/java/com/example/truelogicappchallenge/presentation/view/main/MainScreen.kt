@@ -20,11 +20,13 @@ import com.example.truelogicappchallenge.presentation.view.components.Characters
 import com.example.truelogicappchallenge.presentation.view.components.ErrorTextComponent
 import com.example.truelogicappchallenge.presentation.view.components.ProgressBarComponent
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
+import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
 
 @Composable
 fun MainScreen(
     navController: NavController,
-    listCharactersViewModel: ListCharactersViewModel
+    listCharactersViewModel: ListCharactersViewModel,
+    sharedViewModel: SharedViewModel
 ){
 
     val lazyState = rememberLazyListState()
@@ -32,6 +34,8 @@ fun MainScreen(
 
     LaunchedEffect(key1 = Unit) {
         listCharactersViewModel.getListCharacters()
+        println("The viewmodel is $sharedViewModel")
+        sharedViewModel.setSharedValue("Value from Main")
     }
 
     when(uiState) {

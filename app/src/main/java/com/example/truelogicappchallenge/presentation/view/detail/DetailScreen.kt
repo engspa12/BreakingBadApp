@@ -1,5 +1,6 @@
 package com.example.truelogicappchallenge.presentation.view.detail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -23,35 +24,57 @@ import com.example.truelogicappchallenge.presentation.state.CharactersListUIStat
 import com.example.truelogicappchallenge.presentation.view.components.ErrorTextComponent
 import com.example.truelogicappchallenge.presentation.view.components.ProgressBarComponent
 import com.example.truelogicappchallenge.presentation.viewmodel.CharacterDetailsViewModel
+import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
 import com.skydoves.landscapist.ShimmerParams
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun DetailScreen(
     name: String,
-    characterDetailsViewModel: CharacterDetailsViewModel) {
+    characterDetailsViewModel: CharacterDetailsViewModel,
+    sharedViewModel: SharedViewModel
+) {
 
     val uiState by characterDetailsViewModel.itemUIState.collectAsState()
-    
+    val sharedValue by sharedViewModel.vmSharedValue.collectAsState()
+
     LaunchedEffect(key1 = Unit) {
         characterDetailsViewModel.getItemDetails(name)
+        println("The viewmodel is $sharedViewModel")
     }
 
-    when(uiState) {
+    when (uiState) {
         is CharacterItemUIState.Success -> {
             (uiState as CharacterItemUIState.Success).data?.let { item ->
-                DetailScreen(
-                    name = item.name,
-                    nickname = item.nickname,
-                    img = item.img,
-                    isFavorite = item.isFavorite,
-                    {
-                        characterDetailsViewModel.updateFavoriteFromDetail(item.name, item.isFavorite)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 20.dp)
-                )
+                when (sharedValue) {
+                    "Value from Main" -> {
+                        DetailScreen(
+                            name = item.name,
+                            nickname = item.nickname,
+                            img = item.img,
+                            isFavorite = item.isFavorite,
+                            {
+                                characterDetailsViewModel.updateFavoriteFromDetail(
+                                    item.name,
+                                    item.isFavorite
+                                )
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 20.dp)
+                        )
+                    }
+                    "Another Value" -> {
+                        Text(
+                            text = sharedValue,
+                            modifier = Modifier.fillMaxSize().background(Color.Yellow))
+                    }
+                    else -> {
+                        Text(
+                            text = sharedValue,
+                            modifier = Modifier.fillMaxSize().background(Color.Magenta))
+                    }
+                }
             }
         }
         is CharacterItemUIState.Progress -> {
@@ -68,7 +91,8 @@ fun DetailScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)
-                    .padding(horizontal = 20.dp))
+                    .padding(horizontal = 20.dp)
+            )
         }
     }
 }
@@ -80,7 +104,8 @@ fun DetailScreen(
     img: String,
     isFavorite: Boolean,
     buttonClick: () -> Unit,
-    modifier: Modifier = Modifier) {
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.Top
@@ -122,7 +147,7 @@ fun DetailScreen(
             )
             Button(
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = if(isFavorite) Color.Red else Color.Blue
+                    backgroundColor = if (isFavorite) Color.Red else Color.Blue
                 ),
                 onClick = {
                     buttonClick()
