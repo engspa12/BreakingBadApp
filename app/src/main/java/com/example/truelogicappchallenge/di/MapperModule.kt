@@ -2,18 +2,15 @@ package com.example.truelogicappchallenge.di
 
 import com.example.truelogicappchallenge.data.database.dto.CharacterCache
 import com.example.truelogicappchallenge.data.database.dto.CharacterCacheMapper
-import com.example.truelogicappchallenge.data.network.responses.CharacterNetwork
-import com.example.truelogicappchallenge.data.network.responses.CharacterNetworkMapper
+import com.example.truelogicappchallenge.data.network.response.CharacterNetwork
+import com.example.truelogicappchallenge.data.network.response.CharacterNetworkMapper
 import com.example.truelogicappchallenge.domain.CacheMapper
 import com.example.truelogicappchallenge.domain.NetworkMapper
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)

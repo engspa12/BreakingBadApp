@@ -1,8 +1,8 @@
 package com.example.truelogicappchallenge.domain.usecase
 
 import androidx.test.filters.SmallTest
-import com.example.truelogicappchallenge.domain.helper.DataState
-import com.example.truelogicappchallenge.data.helper.ResponseData
+import com.example.truelogicappchallenge.domain.helper.ResultDomain
+import com.example.truelogicappchallenge.data.helper.ResultData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import com.google.common.truth.Truth.assertThat
@@ -50,7 +50,7 @@ class GetListCharactersUseCaseImplTest {
 
             job.join()
 
-            val response = SUT.getRepositoryData() as DataState.Success
+            val response = SUT.getRepositoryData() as ResultDomain.Success
 
             verify(characterRepository, times(1)).getListCharacters()
             assertThat(response.value[0].name).isEqualTo("name 3")
@@ -72,7 +72,7 @@ class GetListCharactersUseCaseImplTest {
 
             job.join()
 
-            val response = SUT.getRepositoryData() as DataState.Failure
+            val response = SUT.getRepositoryData() as ResultDomain.Failure
 
             verify(characterRepository, times(1)).getListCharacters()
             assertThat(response.errorMessage).isEqualTo("An error occurred")
@@ -91,14 +91,14 @@ class GetListCharactersUseCaseImplTest {
 
         Mockito.`when`(characterRepository.getListCharacters())
             .thenReturn(
-                ResponseData.Success(listCharactersDomain)
+                ResultData.Success(listCharactersDomain)
             )
     }
 
     private suspend fun failureResponse() {
         Mockito.`when`(characterRepository.getListCharacters())
             .thenReturn(
-                ResponseData.Failure("An error occurred")
+                ResultData.Failure("An error occurred")
             )
     }
 

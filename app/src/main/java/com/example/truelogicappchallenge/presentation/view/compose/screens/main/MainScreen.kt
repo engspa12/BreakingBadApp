@@ -1,24 +1,22 @@
-package com.example.truelogicappchallenge.presentation.view.main
+package com.example.truelogicappchallenge.presentation.view.compose.screens.main
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.truelogicappchallenge.global.Screen
 import com.example.truelogicappchallenge.presentation.state.CharactersListUIState
-import com.example.truelogicappchallenge.presentation.view.components.CharactersListComponent
-import com.example.truelogicappchallenge.presentation.view.components.ErrorTextComponent
-import com.example.truelogicappchallenge.presentation.view.components.ProgressBarComponent
+import com.example.truelogicappchallenge.presentation.view.compose.components.main.CharactersList
+import com.example.truelogicappchallenge.presentation.view.compose.components.shared.ErrorIndicator
+import com.example.truelogicappchallenge.presentation.view.compose.components.shared.ProgressBar
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
 
@@ -28,7 +26,6 @@ fun MainScreen(
     listCharactersViewModel: ListCharactersViewModel,
     sharedViewModel: SharedViewModel
 ){
-
     val lazyState = rememberLazyListState()
     val uiState by listCharactersViewModel.mainUIState.collectAsState()
 
@@ -41,7 +38,7 @@ fun MainScreen(
     when(uiState) {
         is CharactersListUIState.Success -> {
             (uiState as CharactersListUIState.Success).data?.let { list ->
-                CharactersListComponent(
+                CharactersList(
                     lazyState,
                     list,
                     { characterView ->
@@ -54,7 +51,7 @@ fun MainScreen(
             }
         }
         is CharactersListUIState.Progress -> {
-            ProgressBarComponent(
+            ProgressBar(
                 message = (uiState as CharactersListUIState.Progress).loadingMessage,
                 modifier = Modifier
                     .fillMaxSize()
@@ -62,12 +59,13 @@ fun MainScreen(
             )
         }
         is CharactersListUIState.Error -> {
-            ErrorTextComponent(
-                errorMessage = (uiState as CharactersListUIState.Error).error,
+            ErrorIndicator(
+                errorMessage = (uiState as CharactersListUIState.Error).errorMessage,
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)
-                    .padding(horizontal = 20.dp))
+                    .padding(horizontal = 20.dp)
+            )
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view
+package com.example.truelogicappchallenge.presentation.view.appcompat.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.truelogicappchallenge.databinding.ActivityMainBinding
+import com.example.truelogicappchallenge.presentation.view.appcompat.adapter.ListCharactersAdapter
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

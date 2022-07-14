@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.data.network.responses
+package com.example.truelogicappchallenge.data.network.response
 
 import com.example.truelogicappchallenge.domain.NetworkMapper
 import com.example.truelogicappchallenge.domain.model.CharacterDomain

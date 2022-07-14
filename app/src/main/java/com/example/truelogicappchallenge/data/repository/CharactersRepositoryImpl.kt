@@ -3,11 +3,11 @@ package com.example.truelogicappchallenge.data.repository
 import com.example.truelogicappchallenge.data.database.CharactersDao
 import com.example.truelogicappchallenge.data.database.dto.CharacterCache
 import com.example.truelogicappchallenge.data.network.ServiceApi
-import com.example.truelogicappchallenge.data.network.responses.CharacterNetwork
+import com.example.truelogicappchallenge.data.network.response.CharacterNetwork
 import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.CacheMapper
 import com.example.truelogicappchallenge.domain.NetworkMapper
-import com.example.truelogicappchallenge.data.helper.ResponseData
+import com.example.truelogicappchallenge.data.helper.ResultData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -25,7 +25,7 @@ class CharactersRepositoryImpl @Inject constructor(
     @DispatchersModule.IODispatcher private val coroutineDispatcher: CoroutineDispatcher
     ): CharactersRepository {
 
-    override suspend fun getListCharacters(): ResponseData<List<CharacterDomain>> {
+    override suspend fun getListCharacters(): ResultData<List<CharacterDomain>> {
 
         return withContext(coroutineDispatcher) {
             try {
@@ -38,18 +38,18 @@ class CharactersRepositoryImpl @Inject constructor(
                         domainItem
                     }
                     insertDataToCache(domainData)
-                    ResponseData.Success(domainData)
+                    ResultData.Success(domainData)
                 } else {
                     val domainData = dataFromCache.map {
                         val domainItem = cacheMapper.mapToDomainModel(it)
                         domainItem
                     }
-                    ResponseData.Success(domainData)
+                    ResultData.Success(domainData)
                 }
 
             } catch (e: IOException){
                 val errorMessage = e.message.toString()
-                ResponseData.Failure(errorMessage)
+                ResultData.Failure(errorMessage)
             }
         }
 

@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.components
+package com.example.truelogicappchallenge.presentation.view.compose.components.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,11 +20,12 @@ import com.example.truelogicappchallenge.presentation.model.CharacterView
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
-fun CharacterItemComponent(
+fun CharacterItem(
     characterView: CharacterView,
     modifier: Modifier = Modifier,
     navCallback: () -> Unit,
-    callbackItem: () -> Unit) {
+    callbackItem: () -> Unit
+){
     Row(
         modifier = modifier
             .clickable {

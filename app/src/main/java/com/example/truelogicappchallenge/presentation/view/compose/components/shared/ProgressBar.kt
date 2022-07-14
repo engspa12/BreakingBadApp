@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.components
+package com.example.truelogicappchallenge.presentation.view.compose.components.shared
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
@@ -10,10 +10,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.truelogicappchallenge.presentation.view.ui.theme.TruelogicAppChallengeTheme
+import com.example.truelogicappchallenge.presentation.view.compose.ui.theme.TruelogicAppChallengeTheme
 
 @Composable
-fun ProgressBarComponent(message: String, modifier: Modifier = Modifier){
+fun ProgressBar(
+    message: String,
+    modifier: Modifier = Modifier
+){
     Column(
         modifier = modifier) {
         CircularProgressIndicator(
@@ -39,7 +42,7 @@ fun DefaultPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            ProgressBarComponent(
+            ProgressBar(
                 message = "Hello Progress",
                 modifier = Modifier
                     .fillMaxSize()

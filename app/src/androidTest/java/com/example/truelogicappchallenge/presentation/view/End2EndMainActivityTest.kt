@@ -17,6 +17,8 @@ import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.onClickViewChild
+import com.example.truelogicappchallenge.presentation.view.appcompat.activity.MainActivity
+import com.example.truelogicappchallenge.presentation.view.appcompat.adapter.ListCharactersAdapter
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import com.example.truelogicappchallenge.withImageResourceView
 import dagger.hilt.android.testing.BindValue

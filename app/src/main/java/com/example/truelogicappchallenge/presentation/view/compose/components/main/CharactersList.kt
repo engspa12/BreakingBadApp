@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.components
+package com.example.truelogicappchallenge.presentation.view.compose.components.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,19 +14,19 @@ import androidx.compose.ui.unit.dp
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 
 @Composable
-fun CharactersListComponent(
+fun CharactersList(
     lazyState: LazyListState,
     list: List<CharacterView>?,
     onItemClicked: (CharacterView) -> Unit,
     onItemFavIconClicked: (Int) -> Unit
-) {
+){
     LazyColumn(
         contentPadding = PaddingValues(vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
         state = lazyState
     ) {
         itemsIndexed(list ?: listOf()) { index, characterView ->
-            CharacterItemComponent(
+            CharacterItem(
                 characterView = CharacterView(
                     name = characterView.name,
                     nickname = characterView.nickname,

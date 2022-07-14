@@ -3,7 +3,7 @@ package com.example.truelogicappchallenge.presentation.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.test.filters.SmallTest
-import com.example.truelogicappchallenge.domain.helper.DataState
+import com.example.truelogicappchallenge.domain.helper.ResultDomain
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
@@ -191,13 +191,13 @@ class ListCharactersViewModelTest {
         listCharacterView.add(CharacterView("name 4", "nickname 4", "img 4", false))
 
         Mockito.`when`(getListCharactersUseCase.getRepositoryData()).thenReturn(
-            DataState.Success(listCharacterView)
+            ResultDomain.Success(listCharacterView)
         )
     }
 
     private suspend fun failureResponse() {
         Mockito.`when`(getListCharactersUseCase.getRepositoryData()).thenReturn(
-            DataState.Failure("Error when retrieving data from usecase")
+            ResultDomain.Failure("Error when retrieving data from usecase")
         )
     }
 }

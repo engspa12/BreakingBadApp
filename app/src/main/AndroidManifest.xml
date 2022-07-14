@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TruelogicAppChallenge">
         <activity
-            android:name=".presentation.view.MainComposeActivity"
+            android:name=".presentation.view.compose.MainComposeActivity"
             android:exported="true"
             android:theme="@style/Theme.TruelogicAppChallenge">
             <intent-filter>
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.view.MainActivity"
+            android:name="com.example.truelogicappchallenge.presentation.view.appcompat.activity.MainActivity"
             android:exported="true">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />

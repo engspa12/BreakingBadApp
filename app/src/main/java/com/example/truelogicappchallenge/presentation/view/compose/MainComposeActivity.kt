@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view
+package com.example.truelogicappchallenge.presentation.view.compose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -21,10 +20,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.truelogicappchallenge.global.Screen
-import com.example.truelogicappchallenge.presentation.view.components.ProgressBarComponent
-import com.example.truelogicappchallenge.presentation.view.detail.DetailScreen
-import com.example.truelogicappchallenge.presentation.view.main.MainScreen
-import com.example.truelogicappchallenge.presentation.view.ui.theme.TruelogicAppChallengeTheme
+import com.example.truelogicappchallenge.presentation.view.compose.components.shared.ProgressBar
+import com.example.truelogicappchallenge.presentation.view.compose.screens.detail.DetailScreen
+import com.example.truelogicappchallenge.presentation.view.compose.screens.main.MainScreen
+import com.example.truelogicappchallenge.presentation.view.compose.ui.theme.TruelogicAppChallengeTheme
 import com.example.truelogicappchallenge.presentation.viewmodel.CharacterDetailsViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
@@ -56,7 +55,7 @@ fun DefaultPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            ProgressBarComponent(
+            ProgressBar(
                 message = "Hello Progress",
                 modifier = Modifier
                     .fillMaxSize()

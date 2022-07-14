@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.test.espresso.idling.CountingIdlingResource
 import com.example.truelogicappchallenge.di.DispatchersModule
-import com.example.truelogicappchallenge.domain.helper.DataState
+import com.example.truelogicappchallenge.domain.helper.ResultDomain
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
@@ -41,12 +41,12 @@ class ListCharactersViewModel @Inject constructor(
             //Only to see the ProgressBar in the UI
             delay(1000L)
             when(val data = getListCharactersUseCase.getRepositoryData()){
-                is DataState.Success -> {
+                is ResultDomain.Success -> {
                     sendDataToView(data.value)
                     helperList = data.value
                     decrementIdlingResourceAPICall()
                 }
-                is DataState.Failure -> {
+                is ResultDomain.Failure -> {
                     sendErrorMessage(data.errorMessage ?: "")
                     decrementIdlingResourceAPICall()
                 }

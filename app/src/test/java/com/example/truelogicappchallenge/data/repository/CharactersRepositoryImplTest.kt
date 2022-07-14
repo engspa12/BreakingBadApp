@@ -5,11 +5,11 @@ import com.example.truelogicappchallenge.data.database.CharactersDao
 import com.example.truelogicappchallenge.data.database.dto.CharacterCache
 import com.example.truelogicappchallenge.data.database.dto.CharacterCacheMapper
 import com.example.truelogicappchallenge.data.network.ServiceApi
-import com.example.truelogicappchallenge.data.network.responses.CharacterNetwork
-import com.example.truelogicappchallenge.data.network.responses.CharacterNetworkMapper
+import com.example.truelogicappchallenge.data.network.response.CharacterNetwork
+import com.example.truelogicappchallenge.data.network.response.CharacterNetworkMapper
 import com.example.truelogicappchallenge.domain.CacheMapper
 import com.example.truelogicappchallenge.domain.NetworkMapper
-import com.example.truelogicappchallenge.data.helper.ResponseData
+import com.example.truelogicappchallenge.data.helper.ResultData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import com.google.common.truth.Truth.assertThat
@@ -76,7 +76,7 @@ class CharactersRepositoryImplTest {
 
             job.join()
 
-            val listCharactersDomain = SUT.getListCharacters() as ResponseData.Success
+            val listCharactersDomain = SUT.getListCharacters() as ResultData.Success
 
             verify(dao, times(1)).getFavorites()
             verify(dao, times(2)).insertCharacter(any())
@@ -100,7 +100,7 @@ class CharactersRepositoryImplTest {
 
             job.join()
 
-            val listCharactersDomain = SUT.getListCharacters() as ResponseData.Success
+            val listCharactersDomain = SUT.getListCharacters() as ResultData.Success
 
             verify(dao, times(1)).getFavorites()
             verify(dao, never()).insertCharacter(any())
@@ -124,7 +124,7 @@ class CharactersRepositoryImplTest {
 
             job.join()
 
-            val response = SUT.getListCharacters() as ResponseData.Failure
+            val response = SUT.getListCharacters() as ResultData.Failure
 
             verify(dao, times(1)).getFavorites()
             verify(dao, never()).insertCharacter(any())

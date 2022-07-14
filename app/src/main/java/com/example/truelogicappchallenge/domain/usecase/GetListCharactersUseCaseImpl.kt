@@ -1,7 +1,7 @@
 package com.example.truelogicappchallenge.domain.usecase
 
-import com.example.truelogicappchallenge.domain.helper.DataState
-import com.example.truelogicappchallenge.data.helper.ResponseData
+import com.example.truelogicappchallenge.domain.helper.ResultDomain
+import com.example.truelogicappchallenge.data.helper.ResultData
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import com.example.truelogicappchallenge.presentation.model.CharacterView
@@ -12,16 +12,16 @@ class GetListCharactersUseCaseImpl @Inject constructor(
     private val charactersRepository: CharactersRepository
 ) : GetListCharactersUseCase {
 
-    override suspend fun getRepositoryData(): DataState<List<CharacterView>> {
+    override suspend fun getRepositoryData(): ResultDomain<List<CharacterView>> {
 
         return when(val repositoryData = charactersRepository.getListCharacters()){
-                is ResponseData.Success -> {
+                is ResultData.Success -> {
                     val filteredList = repositoryData.value.sortedWith(compareBy({ !it.isFavorite }, { it.id }))
                     val originalList = filteredList.map { it.toView() }
-                    DataState.Success(originalList)
+                    ResultDomain.Success(originalList)
                 }
-                is ResponseData.Failure -> {
-                    DataState.Failure(repositoryData.errorMessage)
+                is ResultData.Failure -> {
+                    ResultDomain.Failure(repositoryData.errorMessage)
                 }
         }
     }
