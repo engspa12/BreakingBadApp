@@ -28,7 +28,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun TruelogicAppChallengeTheme(
+fun BreakingBadAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

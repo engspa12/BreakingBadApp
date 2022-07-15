@@ -10,11 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TruelogicAppChallenge">
+        android:theme="@style/Theme.BreakingBadApp">
         <activity
             android:name=".presentation.view.compose.MainComposeActivity"
             android:exported="true"
-            android:theme="@style/Theme.TruelogicAppChallenge">
+            android:theme="@style/Theme.BreakingBadApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

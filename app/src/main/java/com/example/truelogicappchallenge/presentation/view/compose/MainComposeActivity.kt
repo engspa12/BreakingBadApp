@@ -23,7 +23,7 @@ import com.example.truelogicappchallenge.global.Screen
 import com.example.truelogicappchallenge.presentation.view.compose.components.shared.ProgressBar
 import com.example.truelogicappchallenge.presentation.view.compose.screens.detail.DetailScreen
 import com.example.truelogicappchallenge.presentation.view.compose.screens.main.MainScreen
-import com.example.truelogicappchallenge.presentation.view.compose.ui.theme.TruelogicAppChallengeTheme
+import com.example.truelogicappchallenge.presentation.view.compose.ui.theme.BreakingBadAppTheme
 import com.example.truelogicappchallenge.presentation.viewmodel.CharacterDetailsViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
@@ -34,7 +34,7 @@ class MainComposeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TruelogicAppChallengeTheme {
+            BreakingBadAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -50,7 +50,7 @@ class MainComposeActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    TruelogicAppChallengeTheme {
+    BreakingBadAppTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background

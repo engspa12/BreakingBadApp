@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.truelogicappchallenge.presentation.view.compose.ui.theme.TruelogicAppChallengeTheme
+import com.example.truelogicappchallenge.presentation.view.compose.ui.theme.BreakingBadAppTheme
 
 @Composable
 fun ProgressBar(
@@ -37,7 +37,7 @@ fun ProgressBar(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    TruelogicAppChallengeTheme {
+    BreakingBadAppTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
