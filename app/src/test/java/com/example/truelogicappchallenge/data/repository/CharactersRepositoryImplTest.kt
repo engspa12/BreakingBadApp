@@ -1,12 +1,12 @@
 package com.example.truelogicappchallenge.data.repository
 
 import androidx.test.filters.SmallTest
-import com.example.truelogicappchallenge.data.database.CharactersDao
-import com.example.truelogicappchallenge.data.database.dto.CharacterCache
-import com.example.truelogicappchallenge.data.database.dto.CharacterCacheMapper
-import com.example.truelogicappchallenge.data.network.ServiceApi
-import com.example.truelogicappchallenge.data.network.response.CharacterNetwork
-import com.example.truelogicappchallenge.data.network.response.CharacterNetworkMapper
+import com.example.truelogicappchallenge.data.local.CharactersDao
+import com.example.truelogicappchallenge.data.local.model.CharacterCache
+import com.example.truelogicappchallenge.data.local.mapper.CharacterCacheMapper
+import com.example.truelogicappchallenge.data.network.datasource.ServiceApi
+import com.example.truelogicappchallenge.data.network.model.CharacterNetwork
+import com.example.truelogicappchallenge.data.network.mapper.CharacterNetworkMapper
 import com.example.truelogicappchallenge.domain.CacheMapper
 import com.example.truelogicappchallenge.domain.NetworkMapper
 import com.example.truelogicappchallenge.data.helper.ResultData

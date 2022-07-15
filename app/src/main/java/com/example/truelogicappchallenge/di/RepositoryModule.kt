@@ -1,12 +1,12 @@
 package com.example.truelogicappchallenge.di
 
-import com.example.truelogicappchallenge.data.database.CharactersDao
-import com.example.truelogicappchallenge.data.database.dto.CharacterCache
-import com.example.truelogicappchallenge.data.network.ServiceApi
-import com.example.truelogicappchallenge.data.network.response.CharacterNetwork
+import com.example.truelogicappchallenge.data.helper.CacheMapper
+import com.example.truelogicappchallenge.data.helper.NetworkMapper
+import com.example.truelogicappchallenge.data.local.datasource.CharactersDao
+import com.example.truelogicappchallenge.data.local.model.CharacterCache
+import com.example.truelogicappchallenge.data.network.datasource.ServiceApi
+import com.example.truelogicappchallenge.data.network.model.CharacterNetwork
 import com.example.truelogicappchallenge.data.repository.CharactersRepositoryImpl
-import com.example.truelogicappchallenge.domain.CacheMapper
-import com.example.truelogicappchallenge.domain.NetworkMapper
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import dagger.Module

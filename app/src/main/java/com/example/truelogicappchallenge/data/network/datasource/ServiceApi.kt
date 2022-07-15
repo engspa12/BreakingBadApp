@@ -1,6 +1,6 @@
-package com.example.truelogicappchallenge.data.network
+package com.example.truelogicappchallenge.data.network.datasource
 
-import com.example.truelogicappchallenge.data.network.response.CharacterNetwork
+import com.example.truelogicappchallenge.data.network.model.CharacterNetwork
 import retrofit2.http.GET
 import retrofit2.http.Query
 

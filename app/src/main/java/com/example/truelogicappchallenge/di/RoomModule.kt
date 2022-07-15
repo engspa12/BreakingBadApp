@@ -2,8 +2,8 @@ package com.example.truelogicappchallenge.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.truelogicappchallenge.data.database.CharactersDao
-import com.example.truelogicappchallenge.data.database.CharactersRoomDatabase
+import com.example.truelogicappchallenge.data.local.datasource.CharactersDao
+import com.example.truelogicappchallenge.data.local.datasource.CharactersRoomDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

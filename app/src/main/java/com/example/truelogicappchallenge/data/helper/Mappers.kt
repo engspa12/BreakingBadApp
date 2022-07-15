@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.domain
+package com.example.truelogicappchallenge.data.helper
 
 interface NetworkMapper<Dto, DomainModel> {
 

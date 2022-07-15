@@ -14,5 +14,5 @@ dependencyResolutionManagement {
         maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     }
 }
-rootProject.name = "TruelogicAppChallenge"
+rootProject.name = "BreakingBadApp"
 include ':app'

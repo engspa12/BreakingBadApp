@@ -1,9 +1,10 @@
-package com.example.truelogicappchallenge.data.network.response
+package com.example.truelogicappchallenge.data.network.mapper
 
-import com.example.truelogicappchallenge.domain.NetworkMapper
+import com.example.truelogicappchallenge.data.helper.NetworkMapper
+import com.example.truelogicappchallenge.data.network.model.CharacterNetwork
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 
-class CharacterNetworkMapper: NetworkMapper<CharacterNetwork,CharacterDomain> {
+class CharacterNetworkMapper: NetworkMapper<CharacterNetwork, CharacterDomain> {
 
     override fun mapToDomainModel(dto: CharacterNetwork): CharacterDomain {
         return CharacterDomain(

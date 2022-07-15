@@ -1,6 +1,6 @@
 package com.example.truelogicappchallenge.di
 
-import com.example.truelogicappchallenge.data.network.ServiceApi
+import com.example.truelogicappchallenge.data.network.datasource.ServiceApi
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

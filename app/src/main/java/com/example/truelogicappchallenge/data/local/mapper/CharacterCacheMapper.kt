@@ -1,6 +1,7 @@
-package com.example.truelogicappchallenge.data.database.dto
+package com.example.truelogicappchallenge.data.local.mapper
 
-import com.example.truelogicappchallenge.domain.CacheMapper
+import com.example.truelogicappchallenge.data.helper.CacheMapper
+import com.example.truelogicappchallenge.data.local.model.CharacterCache
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 
 class CharacterCacheMapper: CacheMapper<CharacterCache, CharacterDomain> {

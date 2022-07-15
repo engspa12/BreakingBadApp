@@ -1,7 +1,7 @@
-package com.example.truelogicappchallenge.data.database
+package com.example.truelogicappchallenge.data.local.datasource
 
 import androidx.room.*
-import com.example.truelogicappchallenge.data.database.dto.CharacterCache
+import com.example.truelogicappchallenge.data.local.model.CharacterCache
 import kotlinx.coroutines.flow.Flow
 
 @Database(

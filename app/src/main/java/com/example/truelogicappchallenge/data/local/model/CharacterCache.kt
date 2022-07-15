@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.data.database.dto
+package com.example.truelogicappchallenge.data.local.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
