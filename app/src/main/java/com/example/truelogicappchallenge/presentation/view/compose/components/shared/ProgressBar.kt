@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.truelogicappchallenge.presentation.view.compose.ui.theme.BreakingBadAppTheme
+import com.example.truelogicappchallenge.presentation.view.compose.theme.BreakingBadAppTheme
 
 @Composable
 fun ProgressBar(

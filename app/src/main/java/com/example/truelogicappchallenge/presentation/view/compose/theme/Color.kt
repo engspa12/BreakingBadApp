@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose.ui.theme
+package com.example.truelogicappchallenge.presentation.view.compose.theme
 
 import androidx.compose.ui.graphics.Color
 

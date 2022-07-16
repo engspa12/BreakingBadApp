@@ -9,7 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.truelogicappchallenge.*
-import com.example.truelogicappchallenge.di.UseCaseModule
+import com.example.truelogicappchallenge.di.UseCasesModule
 import com.example.truelogicappchallenge.domain.helper.ResultDomain
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
@@ -42,7 +42,7 @@ import org.mockito.junit.MockitoRule
 import org.mockito.kotlin.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@UninstallModules(UseCaseModule::class)
+@UninstallModules(UseCasesModule::class)
 @HiltAndroidTest
 @LargeTest
 @RunWith(MockitoJUnitRunner::class)

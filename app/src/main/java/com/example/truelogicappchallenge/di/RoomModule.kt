@@ -17,7 +17,7 @@ class RoomModule {
 
     @Provides
     @Singleton
-    fun providesAppDatabase(@ApplicationContext context: Context): CharactersRoomDatabase {
+    fun provideAppDatabase(@ApplicationContext context: Context): CharactersRoomDatabase {
         return Room.databaseBuilder(
             context,
             CharactersRoomDatabase::class.java,

@@ -23,7 +23,7 @@ import com.example.truelogicappchallenge.global.Screen
 import com.example.truelogicappchallenge.presentation.view.compose.components.shared.ProgressBar
 import com.example.truelogicappchallenge.presentation.view.compose.screens.detail.DetailScreen
 import com.example.truelogicappchallenge.presentation.view.compose.screens.main.MainScreen
-import com.example.truelogicappchallenge.presentation.view.compose.ui.theme.BreakingBadAppTheme
+import com.example.truelogicappchallenge.presentation.view.compose.theme.BreakingBadAppTheme
 import com.example.truelogicappchallenge.presentation.viewmodel.CharacterDetailsViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel

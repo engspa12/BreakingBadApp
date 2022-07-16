@@ -14,7 +14,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-class MapperModule {
+class MappersModule {
 
     @Provides
     fun provideNetworkMapper(): NetworkMapper<CharacterNetwork, CharacterDomain> {

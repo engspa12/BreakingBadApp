@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class UseCaseModule {
+class UseCasesModule {
 
     @Provides
     fun provideGetListCharactersUseCase(

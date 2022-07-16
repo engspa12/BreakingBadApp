@@ -15,7 +15,7 @@ import javax.inject.Singleton
 class RetrofitModule {
 
     companion object {
-        private val BASE_URL = "https://www.breakingbadapi.com";
+        private val BASE_URL = "https://www.breakingbadapi.com"
     }
 
     @Singleton
