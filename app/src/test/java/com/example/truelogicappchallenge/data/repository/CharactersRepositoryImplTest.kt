@@ -1,17 +1,17 @@
 package com.example.truelogicappchallenge.data.repository
 
 import androidx.test.filters.SmallTest
-import com.example.truelogicappchallenge.data.local.CharactersDao
-import com.example.truelogicappchallenge.data.local.model.CharacterCache
+import com.example.truelogicappchallenge.data.local.datasource.CharactersDao
 import com.example.truelogicappchallenge.data.local.mapper.CharacterCacheMapper
+import com.example.truelogicappchallenge.data.local.model.CharacterCache
 import com.example.truelogicappchallenge.data.network.datasource.ServiceApi
-import com.example.truelogicappchallenge.data.network.model.CharacterNetwork
 import com.example.truelogicappchallenge.data.network.mapper.CharacterNetworkMapper
-import com.example.truelogicappchallenge.domain.CacheMapper
-import com.example.truelogicappchallenge.domain.NetworkMapper
-import com.example.truelogicappchallenge.data.helper.ResultData
+import com.example.truelogicappchallenge.data.network.model.CharacterNetwork
+import com.example.truelogicappchallenge.data.util.CacheMapper
+import com.example.truelogicappchallenge.data.util.NetworkMapper
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
+import com.example.truelogicappchallenge.util.ResultWrapper
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -76,7 +76,7 @@ class CharactersRepositoryImplTest {
 
             job.join()
 
-            val listCharactersDomain = SUT.getListCharacters() as ResultData.Success
+            val listCharactersDomain = SUT.getListCharacters() as ResultWrapper.Success
 
             verify(dao, times(1)).getFavorites()
             verify(dao, times(2)).insertCharacter(any())
@@ -100,7 +100,7 @@ class CharactersRepositoryImplTest {
 
             job.join()
 
-            val listCharactersDomain = SUT.getListCharacters() as ResultData.Success
+            val listCharactersDomain = SUT.getListCharacters() as ResultWrapper.Success
 
             verify(dao, times(1)).getFavorites()
             verify(dao, never()).insertCharacter(any())
@@ -124,7 +124,7 @@ class CharactersRepositoryImplTest {
 
             job.join()
 
-            val response = SUT.getListCharacters() as ResultData.Failure
+            val response = SUT.getListCharacters() as ResultWrapper.Failure
 
             verify(dao, times(1)).getFavorites()
             verify(dao, never()).insertCharacter(any())

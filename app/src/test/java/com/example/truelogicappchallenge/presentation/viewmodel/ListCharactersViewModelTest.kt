@@ -3,10 +3,10 @@ package com.example.truelogicappchallenge.presentation.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.test.filters.SmallTest
-import com.example.truelogicappchallenge.domain.helper.ResultDomain
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
+import com.example.truelogicappchallenge.util.ResultWrapper
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -84,11 +84,11 @@ class ListCharactersViewModelTest {
     @Before
     fun setUp(){
         SUT = ListCharactersViewModel(getListCharactersUseCase, handleFavoritesUseCase, UnconfinedTestDispatcher())
-        SUT.listCharacters.observeForever(listObserver)
+        /*SUT.listCharacters.observeForever(listObserver)
         SUT.errorMessage.observeForever(errorMessageObserver)
         SUT.emptyView.observeForever(emptyViewObserver)
         SUT.progressBar.observeForever(progressBarObserver)
-        SUT.container.observeForever(containerObserver)
+        SUT.container.observeForever(containerObserver)*/
     }
 
     @Test
@@ -191,13 +191,13 @@ class ListCharactersViewModelTest {
         listCharacterView.add(CharacterView("name 4", "nickname 4", "img 4", false))
 
         Mockito.`when`(getListCharactersUseCase.getRepositoryData()).thenReturn(
-            ResultDomain.Success(listCharacterView)
+            ResultWrapper.Success(listCharacterView)
         )
     }
 
     private suspend fun failureResponse() {
         Mockito.`when`(getListCharactersUseCase.getRepositoryData()).thenReturn(
-            ResultDomain.Failure("Error when retrieving data from usecase")
+            ResultWrapper.Failure("Error when retrieving data from usecase")
         )
     }
 }

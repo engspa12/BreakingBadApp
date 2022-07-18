@@ -1,15 +1,15 @@
 package com.example.truelogicappchallenge.data.repository
 
-import com.example.truelogicappchallenge.data.helper.CacheMapper
-import com.example.truelogicappchallenge.data.helper.NetworkMapper
-import com.example.truelogicappchallenge.data.helper.ResultData
 import com.example.truelogicappchallenge.data.local.datasource.CharactersDao
 import com.example.truelogicappchallenge.data.local.model.CharacterCache
 import com.example.truelogicappchallenge.data.network.datasource.ServiceApi
 import com.example.truelogicappchallenge.data.network.model.CharacterNetwork
+import com.example.truelogicappchallenge.data.util.CacheMapper
+import com.example.truelogicappchallenge.data.util.NetworkMapper
 import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
+import com.example.truelogicappchallenge.util.ResultWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -25,7 +25,7 @@ class CharactersRepositoryImpl @Inject constructor(
     @DispatchersModule.IODispatcher private val coroutineDispatcher: CoroutineDispatcher
     ): CharactersRepository {
 
-    override suspend fun getListCharacters(): ResultData<List<CharacterDomain>> {
+    override suspend fun getListCharacters(): ResultWrapper<List<CharacterDomain>> {
 
         return withContext(coroutineDispatcher) {
             try {
@@ -38,18 +38,18 @@ class CharactersRepositoryImpl @Inject constructor(
                         domainItem
                     }
                     insertDataToCache(domainData)
-                    ResultData.Success(domainData)
+                    ResultWrapper.Success(domainData)
                 } else {
                     val domainData = dataFromCache.map {
                         val domainItem = cacheMapper.mapToDomainModel(it)
                         domainItem
                     }
-                    ResultData.Success(domainData)
+                    ResultWrapper.Success(domainData)
                 }
 
             } catch (e: IOException){
                 val errorMessage = e.message.toString()
-                ResultData.Failure(errorMessage)
+                ResultWrapper.Failure(errorMessage)
             }
         }
 

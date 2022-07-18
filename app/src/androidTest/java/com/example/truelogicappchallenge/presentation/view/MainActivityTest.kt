@@ -10,13 +10,13 @@ import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.truelogicappchallenge.*
 import com.example.truelogicappchallenge.di.UseCasesModule
-import com.example.truelogicappchallenge.domain.helper.ResultDomain
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 import com.example.truelogicappchallenge.presentation.view.appcompat.activity.MainActivity
 import com.example.truelogicappchallenge.presentation.view.appcompat.adapter.ListCharactersAdapter
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
+import com.example.truelogicappchallenge.util.ResultWrapper
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -156,13 +156,13 @@ class MainActivityTest {
         list.add(CharacterView("name 2","nickname 2", "https://s-i.huffpost.com/gen/1317262/images/o-ANNA-GUNN-facebook.jpg", false))
 
         Mockito.`when`(getListCharactersUseCase.getRepositoryData()).thenReturn(
-            ResultDomain.Success(list)
+            ResultWrapper.Success(list)
         )
     }
 
     private suspend fun failureResponse() {
         Mockito.`when`(getListCharactersUseCase.getRepositoryData()).thenReturn(
-            ResultDomain.Failure("There is an error message")
+            ResultWrapper.Failure("There is an error message")
         )
     }
 
@@ -182,8 +182,8 @@ class MainActivityTest {
         listWithFavorite0.add(CharacterView("name 2","nickname 2", "https://s-i.huffpost.com/gen/1317262/images/o-ANNA-GUNN-facebook.jpg", false))
 
         Mockito.`when`(getListCharactersUseCase.getRepositoryData())
-            .thenReturn(ResultDomain.Success(listWithoutFavorites))
-            .thenReturn(ResultDomain.Success(listWithFavorite0))
+            .thenReturn(ResultWrapper.Success(listWithoutFavorites))
+            .thenReturn(ResultWrapper.Success(listWithFavorite0))
     }
 
 }
