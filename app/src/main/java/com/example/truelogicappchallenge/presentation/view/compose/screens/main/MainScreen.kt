@@ -25,7 +25,7 @@ fun MainScreen(
     navController: NavController,
     listCharactersViewModel: ListCharactersViewModel,
     sharedViewModel: SharedViewModel
-){
+) {
     val lazyState = rememberLazyListState()
     val uiState by listCharactersViewModel.mainUIState.collectAsState()
 
@@ -35,24 +35,22 @@ fun MainScreen(
         sharedViewModel.setSharedValue("Value from Main")
     }
 
-    when(uiState) {
+    when (uiState) {
         is CharactersListUIState.Success -> {
-            (uiState as CharactersListUIState.Success).data?.let { list ->
-                CharactersList(
-                    lazyState,
-                    list,
-                    { characterView ->
-                        navController.navigate(Screen.DetailScreen.withArgs(characterView.name))
-                    }
-                )
-                { index ->
-                    listCharactersViewModel.updateFavoriteStatus(index)
+            CharactersList(
+                lazyState,
+                uiState.value,
+                { characterView ->
+                    navController.navigate(Screen.DetailScreen.withArgs(characterView.name))
                 }
+            )
+            { index ->
+                listCharactersViewModel.updateFavoriteStatus(index)
             }
         }
         is CharactersListUIState.Progress -> {
             ProgressBar(
-                message = (uiState as CharactersListUIState.Progress).loadingMessage,
+                message = uiState.loadingMessage,
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)
@@ -60,7 +58,7 @@ fun MainScreen(
         }
         is CharactersListUIState.Error -> {
             ErrorIndicator(
-                errorMessage = (uiState as CharactersListUIState.Error).errorMessage,
+                errorMessage = uiState.errorMessage,
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)

@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -17,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.truelogicappchallenge.R
 import com.example.truelogicappchallenge.presentation.model.CharacterView
+import com.skydoves.landscapist.ShimmerParams
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
@@ -40,6 +42,13 @@ fun CharacterItem(
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .centerCrop()
             },
+            shimmerParams = ShimmerParams(
+                baseColor = MaterialTheme.colors.background,
+                highlightColor = Color.Green,
+                durationMillis = 350,
+                dropOff = 0.65f,
+                tilt = 20f
+            ),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
             modifier = Modifier

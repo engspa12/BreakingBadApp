@@ -37,7 +37,7 @@ fun DetailScreen(
 
     when (uiState) {
         is CharacterItemUIState.Success -> {
-            (uiState as CharacterItemUIState.Success).data?.let { item ->
+            uiState.value?.let { item ->
                 when (sharedValue) {
                     "Value from Main" -> {
                         CharacterDetails(
@@ -71,7 +71,7 @@ fun DetailScreen(
         }
         is CharacterItemUIState.Progress -> {
             ProgressBar(
-                message = (uiState as CharacterItemUIState.Progress).loadingMessage,
+                message = uiState.loadingMessage,
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)
@@ -79,7 +79,7 @@ fun DetailScreen(
         }
         is CharacterItemUIState.Error -> {
             ErrorIndicator(
-                errorMessage = (uiState as CharacterItemUIState.Error).error,
+                errorMessage = uiState.errorMessage,
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)
