@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose
+package com.example.truelogicappchallenge.presentation.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,7 +7,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.truelogicappchallenge.presentation.view.compose.theme.BreakingBadAppTheme
+import com.example.truelogicappchallenge.presentation.view.compose.App
+import com.example.truelogicappchallenge.presentation.view.theme.BreakingBadAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,7 +17,6 @@ class MainComposeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BreakingBadAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background

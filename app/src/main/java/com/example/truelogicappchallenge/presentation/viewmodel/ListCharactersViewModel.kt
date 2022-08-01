@@ -36,7 +36,7 @@ class ListCharactersViewModel @Inject constructor(
     fun getListCharacters(){
 
         incrementIdlingResourceAPICall()
-        showProgressBar("Loading list of items...")
+        showProgressBar()
         viewModelScope.launch(mainDispatcher) {
             //Only to see the ProgressBar in the UI
             delay(1000L)
@@ -73,8 +73,8 @@ class ListCharactersViewModel @Inject constructor(
         _mainUIState.value = CharactersListUIState.Error(message)
     }
 
-    private fun showProgressBar(message: String) {
-        _mainUIState.value = CharactersListUIState.Progress(message)
+    private fun showProgressBar() {
+        _mainUIState.value = CharactersListUIState.Progress("Loading list of items...")
     }
 
     private fun incrementIdlingResourceAPICall(){

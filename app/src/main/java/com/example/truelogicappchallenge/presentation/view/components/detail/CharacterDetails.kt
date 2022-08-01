@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose.components.detail
+package com.example.truelogicappchallenge.presentation.view.components.detail
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -10,11 +10,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.truelogicappchallenge.R
 import com.skydoves.landscapist.ShimmerParams
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -75,7 +77,11 @@ fun CharacterDetails(
                 }
             ) {
                 Text(
-                    text = if (isFavorite) "Remove from favorites" else "Add to favorites",
+                    text =
+                    if (isFavorite)
+                        stringResource(id = R.string.remove_from_favorites)
+                    else
+                        stringResource(id = R.string.add_to_favorites),
                     textAlign = TextAlign.Center
                 )
             }

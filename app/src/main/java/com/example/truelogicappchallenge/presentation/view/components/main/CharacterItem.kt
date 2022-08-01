@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose.components.main
+package com.example.truelogicappchallenge.presentation.view.components.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -78,7 +78,11 @@ fun CharacterItem(
             )
         }
         Image(
-            painter = if(characterView.isFavorite) painterResource(id = R.drawable.ic_favorite) else painterResource(id = R.drawable.ic_no_favorite),
+            painter =
+            if (characterView.isFavorite)
+                painterResource(id = R.drawable.ic_favorite)
+            else
+                painterResource(id = R.drawable.ic_no_favorite),
             modifier = Modifier
                 .requiredSize(36.dp)
                 .weight(1f)

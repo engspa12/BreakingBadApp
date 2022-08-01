@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose.theme
+package com.example.truelogicappchallenge.presentation.view.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

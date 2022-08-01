@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BreakingBadApp">
         <activity
-            android:name=".presentation.view.compose.MainComposeActivity"
+            android:name=".presentation.view.MainComposeActivity"
             android:exported="true"
             android:theme="@style/Theme.BreakingBadApp">
             <intent-filter>
@@ -20,15 +20,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="com.example.truelogicappchallenge.presentation.view.appcompat.activity.MainActivity"
-            android:exported="true">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
     </application>
 

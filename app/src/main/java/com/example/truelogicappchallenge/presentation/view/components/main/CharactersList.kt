@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose.components.main
+package com.example.truelogicappchallenge.presentation.view.components.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

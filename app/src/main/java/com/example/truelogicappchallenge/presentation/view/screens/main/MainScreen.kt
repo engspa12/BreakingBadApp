@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose.screens.main
+package com.example.truelogicappchallenge.presentation.view.screens.main
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,11 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.truelogicappchallenge.global.Screen
+import com.example.truelogicappchallenge.global.Constants
+import com.example.truelogicappchallenge.presentation.navigation.Screen
 import com.example.truelogicappchallenge.presentation.state.CharactersListUIState
-import com.example.truelogicappchallenge.presentation.view.compose.components.main.CharactersList
-import com.example.truelogicappchallenge.presentation.view.compose.components.shared.ErrorIndicator
-import com.example.truelogicappchallenge.presentation.view.compose.components.shared.ProgressBar
+import com.example.truelogicappchallenge.presentation.view.components.main.CharactersList
+import com.example.truelogicappchallenge.presentation.view.components.shared.ErrorIndicator
+import com.example.truelogicappchallenge.presentation.view.components.shared.ProgressBar
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
 
@@ -31,8 +32,7 @@ fun MainScreen(
 
     LaunchedEffect(key1 = Unit) {
         listCharactersViewModel.getListCharacters()
-        println("The viewmodel is $sharedViewModel")
-        sharedViewModel.setSharedValue("Value from Main")
+        sharedViewModel.setSharedValue(Constants.VALUE_FROM_MAIN)
     }
 
     when (uiState) {

@@ -1,6 +1,5 @@
 package com.example.truelogicappchallenge.presentation.view.compose
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -10,9 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.example.truelogicappchallenge.global.Screen
-import com.example.truelogicappchallenge.presentation.view.compose.screens.detail.DetailScreen
-import com.example.truelogicappchallenge.presentation.view.compose.screens.main.MainScreen
+import com.example.truelogicappchallenge.presentation.navigation.Screen
+import com.example.truelogicappchallenge.presentation.view.screens.demo.DemoScreen
+import com.example.truelogicappchallenge.presentation.view.screens.detail.DetailScreen
+import com.example.truelogicappchallenge.presentation.view.screens.main.MainScreen
 import com.example.truelogicappchallenge.presentation.viewmodel.CharacterDetailsViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
@@ -68,7 +68,3 @@ fun App() {
     }
 }
 
-@Composable
-fun DemoScreen(){
-    Text(text = "Hello world")
-}

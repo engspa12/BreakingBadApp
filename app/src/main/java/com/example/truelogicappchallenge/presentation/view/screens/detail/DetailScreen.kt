@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose.screens.detail
+package com.example.truelogicappchallenge.presentation.view.screens.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,10 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.truelogicappchallenge.global.Constants
 import com.example.truelogicappchallenge.presentation.state.CharacterItemUIState
-import com.example.truelogicappchallenge.presentation.view.compose.components.detail.CharacterDetails
-import com.example.truelogicappchallenge.presentation.view.compose.components.shared.ErrorIndicator
-import com.example.truelogicappchallenge.presentation.view.compose.components.shared.ProgressBar
+import com.example.truelogicappchallenge.presentation.view.components.detail.CharacterDetails
+import com.example.truelogicappchallenge.presentation.view.components.shared.ErrorIndicator
+import com.example.truelogicappchallenge.presentation.view.components.shared.ProgressBar
 import com.example.truelogicappchallenge.presentation.viewmodel.CharacterDetailsViewModel
 import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
 
@@ -32,14 +33,13 @@ fun DetailScreen(
 
     LaunchedEffect(key1 = Unit) {
         characterDetailsViewModel.getItemDetails(name)
-        println("The viewmodel is $sharedViewModel")
     }
 
     when (uiState) {
         is CharacterItemUIState.Success -> {
             uiState.value?.let { item ->
                 when (sharedValue) {
-                    "Value from Main" -> {
+                    Constants.VALUE_FROM_MAIN -> {
                         CharacterDetails(
                             name = item.name,
                             nickname = item.nickname,
@@ -56,7 +56,7 @@ fun DetailScreen(
                                 .padding(vertical = 20.dp)
                         )
                     }
-                    "Another Value" -> {
+                    Constants.VALUE_FROM_OTHERS -> {
                         Text(
                             text = sharedValue,
                             modifier = Modifier.fillMaxSize().background(Color.Yellow))

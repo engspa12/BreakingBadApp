@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose.theme
+package com.example.truelogicappchallenge.presentation.view.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

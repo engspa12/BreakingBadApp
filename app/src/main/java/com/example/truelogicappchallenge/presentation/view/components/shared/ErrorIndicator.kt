@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose.components.shared
+package com.example.truelogicappchallenge.presentation.view.components.shared
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

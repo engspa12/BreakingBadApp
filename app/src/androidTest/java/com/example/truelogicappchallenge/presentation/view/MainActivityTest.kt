@@ -13,8 +13,8 @@ import com.example.truelogicappchallenge.di.UseCasesModule
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
-import com.example.truelogicappchallenge.presentation.view.appcompat.activity.MainActivity
-import com.example.truelogicappchallenge.presentation.view.appcompat.adapter.ListCharactersAdapter
+//import com.example.truelogicappchallenge.presentation.view.appcompat.activity.MainActivity
+//import com.example.truelogicappchallenge.presentation.view.appcompat.adapter.ListCharactersAdapter
 import com.example.truelogicappchallenge.presentation.viewmodel.ListCharactersViewModel
 import com.example.truelogicappchallenge.util.ResultWrapper
 import com.google.common.truth.Truth.assertThat
@@ -49,7 +49,7 @@ import org.mockito.kotlin.*
 class MainActivityTest {
 
     private lateinit var context: Context
-    private lateinit var scenario: ActivityScenario<MainActivity>
+    //private lateinit var scenario: ActivityScenario<MainActivity>
 
     val captorName: ArgumentCaptor<String> = ArgumentCaptor.forClass(String::class.java)
     val captorIsFavorite: ArgumentCaptor<Boolean> = ArgumentCaptor.forClass(Boolean::class.java)
@@ -86,7 +86,7 @@ class MainActivityTest {
 
             val job = launch {
                 succesfulResponse()
-                scenario = ActivityScenario.launch(MainActivity::class.java)
+                //scenario = ActivityScenario.launch(MainActivity::class.java)
             }
 
             job.join()
@@ -102,14 +102,14 @@ class MainActivityTest {
         return runTest {
             val job = launch {
                 setFavoriteCase()
-                scenario = ActivityScenario.launch(MainActivity::class.java)
+                //scenario = ActivityScenario.launch(MainActivity::class.java)
             }
 
             job.join()
 
-            onView(withId(R.id.recycler_view)).perform(
+            /*onView(withId(R.id.recycler_view)).perform(
                 RecyclerViewActions
-                .actionOnItemAtPosition<ListCharactersAdapter.ListCharacterHolder>(0, onClickViewChild(R.id.favoriteIcon)))
+                .actionOnItemAtPosition<ListCharactersAdapter.ListCharacterHolder>(0, onClickViewChild(R.id.favoriteIcon)))*/
 
             onView(allOf(withId(R.id.favoriteIcon), withImageResourceView(R.drawable.ic_favorite), withContentDescription("Favorite_0"))).check(matches(isDisplayed()))
             onView(allOf(withId(R.id.favoriteIcon), withImageResourceView(R.drawable.ic_no_favorite), withContentDescription("No_favorite_1"))).check(matches(isDisplayed()))
@@ -129,7 +129,7 @@ class MainActivityTest {
 
             val job = launch {
                 failureResponse()
-                scenario = ActivityScenario.launch(MainActivity::class.java)
+                //scenario = ActivityScenario.launch(MainActivity::class.java)
             }
 
             job.join()
@@ -144,7 +144,7 @@ class MainActivityTest {
 
     @After
     fun tearDown() {
-        scenario.close()
+        //scenario.close()
     }
 
     private suspend fun succesfulResponse(){

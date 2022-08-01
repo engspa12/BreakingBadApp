@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.global
+package com.example.truelogicappchallenge.presentation.navigation
 
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 import java.net.URLEncoder
