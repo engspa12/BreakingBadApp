@@ -11,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.truelogicappchallenge.global.Constants
 import com.example.truelogicappchallenge.presentation.navigation.Screen
 import com.example.truelogicappchallenge.presentation.state.CharactersListUIState
@@ -23,7 +22,7 @@ import com.example.truelogicappchallenge.presentation.viewmodel.SharedViewModel
 
 @Composable
 fun MainScreen(
-    navController: NavController,
+    navigateToDetailsScreen: (String) -> Unit,
     listCharactersViewModel: ListCharactersViewModel,
     sharedViewModel: SharedViewModel
 ) {
@@ -40,8 +39,8 @@ fun MainScreen(
             CharactersList(
                 lazyState,
                 uiState.value,
-                { characterView ->
-                    navController.navigate(Screen.DetailScreen.withArgs(characterView.name))
+                { characterName ->
+                    navigateToDetailsScreen(characterName)
                 }
             )
             { index ->

@@ -17,7 +17,7 @@ import com.example.truelogicappchallenge.presentation.model.CharacterView
 fun CharactersList(
     lazyState: LazyListState,
     list: List<CharacterView>?,
-    onItemClicked: (CharacterView) -> Unit,
+    onItemClicked: (String) -> Unit,
     onItemFavIconClicked: (Int) -> Unit
 ){
     LazyColumn(
@@ -37,7 +37,7 @@ fun CharactersList(
                     .background(MaterialTheme.colors.background)
                     .fillMaxWidth(),
                 {
-                    onItemClicked(characterView)
+                    onItemClicked(characterView.name)
                 }
             ) {
                 onItemFavIconClicked(index)

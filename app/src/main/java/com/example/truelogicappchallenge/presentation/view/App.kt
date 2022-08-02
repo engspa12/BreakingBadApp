@@ -32,7 +32,9 @@ fun App() {
                 val parentViewModel = hiltViewModel<SharedViewModel>(parentEntry)
                 val listCharactersViewModel = hiltViewModel<ListCharactersViewModel>()
                 MainScreen(
-                    navController = navController,
+                    navigateToDetailsScreen = { characterName ->
+                        navController.navigate(Screen.DetailScreen.withArgs(characterName))
+                    },
                     listCharactersViewModel =  listCharactersViewModel,
                     sharedViewModel = parentViewModel
                 )
