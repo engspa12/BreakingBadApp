@@ -4,12 +4,13 @@ import com.example.truelogicappchallenge.data.local.datasource.CharactersDao
 import com.example.truelogicappchallenge.data.local.model.CharacterCache
 import com.example.truelogicappchallenge.data.network.datasource.ServiceApi
 import com.example.truelogicappchallenge.data.network.model.CharacterNetwork
-import com.example.truelogicappchallenge.data.util.CacheMapper
-import com.example.truelogicappchallenge.data.util.NetworkMapper
 import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
+import com.example.truelogicappchallenge.domain.util.CacheMapper
+import com.example.truelogicappchallenge.domain.util.NetworkMapper
 import com.example.truelogicappchallenge.util.ResultWrapper
+import com.example.truelogicappchallenge.util.StringWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -49,7 +50,7 @@ class CharactersRepositoryImpl @Inject constructor(
 
             } catch (e: IOException){
                 val errorMessage = e.message.toString()
-                ResultWrapper.Failure(errorMessage)
+                ResultWrapper.Failure(StringWrapper.SimpleString(errorMessage))
             }
         }
 

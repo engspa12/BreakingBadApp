@@ -1,7 +1,7 @@
 package com.example.truelogicappchallenge.domain.usecase
 
-import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
+import com.example.truelogicappchallenge.domain.util.toView
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -59,19 +59,23 @@ fun DetailScreen(
                     Constants.VALUE_FROM_OTHERS -> {
                         Text(
                             text = sharedValue,
-                            modifier = Modifier.fillMaxSize().background(Color.Yellow))
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color.Yellow))
                     }
                     else -> {
                         Text(
                             text = sharedValue,
-                            modifier = Modifier.fillMaxSize().background(Color.Magenta))
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color.Magenta))
                     }
                 }
             }
         }
         is CharacterItemUIState.Progress -> {
             ProgressBar(
-                message = uiState.loadingMessage,
+                message = uiState.loadingMessage.asString(),
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)
@@ -79,7 +83,7 @@ fun DetailScreen(
         }
         is CharacterItemUIState.Error -> {
             ErrorIndicator(
-                errorMessage = uiState.errorMessage,
+                errorMessage = uiState.errorMessage.asString(),
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)

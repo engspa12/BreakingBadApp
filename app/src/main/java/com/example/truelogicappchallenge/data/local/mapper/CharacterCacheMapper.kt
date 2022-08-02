@@ -1,8 +1,8 @@
 package com.example.truelogicappchallenge.data.local.mapper
 
 import com.example.truelogicappchallenge.data.local.model.CharacterCache
-import com.example.truelogicappchallenge.data.util.CacheMapper
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
+import com.example.truelogicappchallenge.domain.util.CacheMapper
 
 class CharacterCacheMapper: CacheMapper<CharacterCache, CharacterDomain> {
     override fun mapToDomainModel(dto: CharacterCache): CharacterDomain {

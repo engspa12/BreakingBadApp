@@ -2,13 +2,11 @@ package com.example.truelogicappchallenge.di
 
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
 import com.example.truelogicappchallenge.domain.usecase.*
+import com.example.truelogicappchallenge.util.Validator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -16,9 +14,10 @@ class UseCasesModule {
 
     @Provides
     fun provideGetListCharactersUseCase(
-        charactersRepository: CharactersRepository
+        charactersRepository: CharactersRepository,
+        validator: Validator
     ): GetListCharactersUseCase {
-        return GetListCharactersUseCaseImpl(charactersRepository)
+        return GetListCharactersUseCaseImpl(charactersRepository, validator)
     }
 
     @Provides

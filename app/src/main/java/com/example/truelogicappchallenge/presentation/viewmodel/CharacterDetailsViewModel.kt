@@ -2,10 +2,12 @@ package com.example.truelogicappchallenge.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.truelogicappchallenge.R
 import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.usecase.GetItemDetailsUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.state.CharacterItemUIState
+import com.example.truelogicappchallenge.util.StringWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
@@ -21,7 +23,7 @@ class CharacterDetailsViewModel @Inject constructor(
     @DispatchersModule.MainDispatcher private val mainDispatcher: CoroutineDispatcher
 ): ViewModel() {
 
-    private val _itemUIState = MutableStateFlow<CharacterItemUIState>(CharacterItemUIState.Progress(""))
+    private val _itemUIState = MutableStateFlow<CharacterItemUIState>(CharacterItemUIState.Progress(StringWrapper.ResourceString(id = R.string.loading_item_details)))
     val itemUIState: StateFlow<CharacterItemUIState> = _itemUIState
 
     fun getItemDetails(name: String) {
@@ -42,7 +44,7 @@ class CharacterDetailsViewModel @Inject constructor(
     }
 
     private fun showProgressBar() {
-        _itemUIState.value = CharacterItemUIState.Progress("Loading item data...")
+        _itemUIState.value = CharacterItemUIState.Progress(StringWrapper.ResourceString(id = R.string.loading_item_details))
     }
 }
 

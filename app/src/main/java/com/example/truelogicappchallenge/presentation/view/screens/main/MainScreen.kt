@@ -50,7 +50,7 @@ fun MainScreen(
         }
         is CharactersListUIState.Progress -> {
             ProgressBar(
-                message = uiState.loadingMessage,
+                message = uiState.loadingMessage.asString(),
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)
@@ -58,7 +58,7 @@ fun MainScreen(
         }
         is CharactersListUIState.Error -> {
             ErrorIndicator(
-                errorMessage = uiState.errorMessage,
+                errorMessage = uiState.errorMessage.asString(),
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight(Alignment.CenterVertically)

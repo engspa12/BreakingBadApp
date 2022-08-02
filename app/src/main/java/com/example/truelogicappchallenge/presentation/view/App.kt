@@ -1,4 +1,4 @@
-package com.example.truelogicappchallenge.presentation.view.compose
+package com.example.truelogicappchallenge.presentation.view
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

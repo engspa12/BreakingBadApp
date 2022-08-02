@@ -4,12 +4,14 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.test.espresso.idling.CountingIdlingResource
+import com.example.truelogicappchallenge.R
 import com.example.truelogicappchallenge.di.DispatchersModule
 import com.example.truelogicappchallenge.domain.usecase.GetListCharactersUseCase
 import com.example.truelogicappchallenge.domain.usecase.HandleFavoritesUseCase
 import com.example.truelogicappchallenge.presentation.model.CharacterView
 import com.example.truelogicappchallenge.presentation.state.CharactersListUIState
 import com.example.truelogicappchallenge.util.ResultWrapper
+import com.example.truelogicappchallenge.util.StringWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
@@ -25,7 +27,7 @@ class ListCharactersViewModel @Inject constructor(
     @DispatchersModule.MainDispatcher private val mainDispatcher: CoroutineDispatcher
 ): ViewModel() {
 
-    private val _mainUIState = MutableStateFlow<CharactersListUIState>(CharactersListUIState.Progress(""))
+    private val _mainUIState = MutableStateFlow<CharactersListUIState>(CharactersListUIState.Progress(StringWrapper.ResourceString(id = R.string.loading_list_items)))
     val mainUIState: StateFlow<CharactersListUIState>
         get() = _mainUIState
 
@@ -47,7 +49,7 @@ class ListCharactersViewModel @Inject constructor(
                     decrementIdlingResourceAPICall()
                 }
                 is ResultWrapper.Failure -> {
-                    sendErrorMessage(result.errorMessage ?: "")
+                    sendErrorMessage(result.errorMessage)
                     decrementIdlingResourceAPICall()
                 }
             }
@@ -69,12 +71,12 @@ class ListCharactersViewModel @Inject constructor(
         _mainUIState.value = CharactersListUIState.Success(data)
     }
 
-    private fun sendErrorMessage(message: String) {
+    private fun sendErrorMessage(message: StringWrapper) {
         _mainUIState.value = CharactersListUIState.Error(message)
     }
 
     private fun showProgressBar() {
-        _mainUIState.value = CharactersListUIState.Progress("Loading list of items...")
+        _mainUIState.value = CharactersListUIState.Progress(StringWrapper.ResourceString(id = R.string.loading_list_items))
     }
 
     private fun incrementIdlingResourceAPICall(){

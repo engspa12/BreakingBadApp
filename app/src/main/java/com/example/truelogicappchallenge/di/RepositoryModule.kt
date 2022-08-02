@@ -5,10 +5,10 @@ import com.example.truelogicappchallenge.data.local.model.CharacterCache
 import com.example.truelogicappchallenge.data.network.datasource.ServiceApi
 import com.example.truelogicappchallenge.data.network.model.CharacterNetwork
 import com.example.truelogicappchallenge.data.repository.CharactersRepositoryImpl
-import com.example.truelogicappchallenge.data.util.CacheMapper
-import com.example.truelogicappchallenge.data.util.NetworkMapper
 import com.example.truelogicappchallenge.domain.model.CharacterDomain
 import com.example.truelogicappchallenge.domain.repository.CharactersRepository
+import com.example.truelogicappchallenge.domain.util.CacheMapper
+import com.example.truelogicappchallenge.domain.util.NetworkMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
